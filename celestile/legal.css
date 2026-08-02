@@ -1,0 +1,130 @@
+/* Celestile legal pages.
+   Palette lifted from the game's own tokens so the policy looks like it belongs
+   to the app it describes, rather than a stock document. The isometric diamond
+   is the game's identity motif; it marks each section here too. */
+
+:root {
+  --void: #07080f;
+  --deep: #0d1018;
+  --surface: #181b24;
+  --surface-2: #22262f;
+  --hairline: #ffffff14;
+  --hi: #f2f4f8;
+  --mid: #b3bac7;
+  --low: #949cab;
+  --player: #45c46a;
+  --accent: #4ad6c4;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--void);
+  color: var(--hi);
+  font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  /* Hindi, Korean and Japanese need their own fallbacks or the browser picks
+     something with the wrong weight and the page looks broken in three of the
+     nine languages. */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans",
+    "Noto Sans Devanagari", "Noto Sans KR", "Noto Sans JP", Helvetica, Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+.wrap { max-width: 780px; margin: 0 auto; padding: 28px 20px 96px; }
+
+/* --- header --------------------------------------------------------- */
+
+header { border-bottom: 1px solid var(--hairline); padding-bottom: 20px; }
+
+.brand {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--low);
+}
+.brand a { color: var(--low); text-decoration: none; }
+.brand a:hover { color: var(--mid); }
+
+/* The mark: an iso tile with a world on it, the same shape as the app icon. */
+.mark { width: 26px; height: 26px; flex: none; }
+
+h1 { font-size: 30px; line-height: 1.2; margin: 18px 0 6px; font-weight: 650; }
+.meta { color: var(--low); font-size: 14px; margin: 0; }
+
+/* --- language switcher ------------------------------------------------
+   Every language reads in its own script. Someone looking for their language
+   should not have to read English to find it — the same rule the game's own
+   settings screen follows. */
+
+.langs {
+  display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0 0;
+  padding: 0; list-style: none;
+}
+.langs button {
+  font: inherit; font-size: 13.5px; line-height: 1;
+  padding: 7px 12px; min-height: 34px;
+  background: var(--surface); color: var(--mid);
+  border: 1px solid transparent; border-radius: 999px;
+  cursor: pointer; transition: background 120ms, color 120ms;
+}
+.langs button:hover { background: var(--surface-2); color: var(--hi); }
+.langs button[aria-current="true"] {
+  background: color-mix(in srgb, var(--player) 18%, var(--surface));
+  border-color: color-mix(in srgb, var(--player) 55%, transparent);
+  color: var(--hi);
+}
+.langs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* --- body ------------------------------------------------------------- */
+
+h2 {
+  font-size: 18px; margin: 40px 0 10px; color: var(--hi); font-weight: 620;
+  display: flex; align-items: baseline; gap: 10px;
+}
+/* A small diamond instead of a number: the sections are not a sequence, so
+   numbering them would imply an order that does not exist. */
+h2::before {
+  content: ""; flex: none;
+  width: 9px; height: 9px; margin-bottom: 1px;
+  background: var(--player); opacity: 0.75;
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+h3 { font-size: 15.5px; margin: 22px 0 4px; color: var(--mid); font-weight: 600; }
+p { margin: 10px 0; color: var(--mid); }
+strong { color: var(--hi); font-weight: 600; }
+ul { padding-left: 20px; margin: 10px 0; }
+li { margin-bottom: 8px; color: var(--mid); }
+a { color: var(--accent); }
+a:hover { color: var(--player); }
+
+.note {
+  background: color-mix(in srgb, var(--player) 8%, var(--deep));
+  border-left: 3px solid var(--player);
+  border-radius: 0 6px 6px 0;
+  padding: 12px 16px; margin: 18px 0;
+}
+.note p { margin: 0; color: var(--hi); }
+
+/* Wide tables must scroll inside themselves rather than pushing the page
+   sideways on a phone. */
+.tablewrap { overflow-x: auto; margin: 14px 0; }
+table { border-collapse: collapse; width: 100%; min-width: 460px; font-size: 14.5px; }
+th, td { border: 1px solid var(--hairline); padding: 9px 11px; text-align: left; vertical-align: top; }
+th { background: var(--surface); color: var(--hi); font-weight: 600; }
+td { color: var(--mid); }
+
+footer {
+  margin-top: 52px; padding-top: 18px;
+  border-top: 1px solid var(--hairline);
+  color: var(--low); font-size: 14px;
+}
+footer a { color: var(--mid); }
+
+/* The translated pages are a courtesy; the English text is the one that
+   governs. Saying so quietly, at the foot of every translation. */
+.governing { font-size: 13px; color: var(--low); margin-top: 10px; }
+
+@media (max-width: 480px) {
+  h1 { font-size: 25px; }
+  .wrap { padding: 22px 16px 72px; }
+}
