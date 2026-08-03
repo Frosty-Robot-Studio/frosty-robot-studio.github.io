@@ -1,0 +1,5 @@
+# Build-time working directory: the approved plan, the review reports and every
+# screenshot taken while iterating. Useful to keep on disk, not worth publishing
+# from a Pages repo (the screenshots alone are ~16 MB).
+# To keep a specific file anyway: git add -f design/build-plan.md
+design/

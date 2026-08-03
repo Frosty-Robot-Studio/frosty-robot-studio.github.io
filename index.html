@@ -1,54 +1,518 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frosty Robot Studio</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .games { text-align: left; margin-top: 34px; }
-        .games h2 { font-size: 18px; margin: 0 0 4px; }
-        .games p { margin: 0 0 8px; color: #555; }
-        .games .legal { font-size: 14px; color: #777; }
-        .games .legal a { color: #3f7a2e; }
-        hr { border: 0; border-top: 1px solid #e6e6ec; margin: 28px 0; }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Frosty Robot Studio — turn-based and idle games for phones</title>
+<meta name="description" content="An independent studio building turn-based strategy and idle games for phones and tablets. Makers of Celestile and Timber Frenzy.">
+<meta name="theme-color" content="#06080e">
+<link rel="canonical" href="https://frosty-robot-studio.github.io/">
+<link rel="icon" href="assets/frs-mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/frs-mark-180.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Frosty Robot Studio">
+<meta property="og:description" content="Turn-based strategy and idle games for phones and tablets. Makers of Celestile.">
+<meta property="og:url" content="https://frosty-robot-studio.github.io/">
+<meta property="og:image" content="https://frosty-robot-studio.github.io/assets/og-studio.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<!-- No <link rel="preload"> for the display face on purpose: a font preload
+     must be crossorigin, and a crossorigin fetch from a file:// origin is
+     blocked, which would put a CORS error in the console every time the site is
+     opened from disk. The brief asks for a self-contained page that works
+     offline, and 22 KB with font-display:swap costs one brief flash. -->
+<link rel="stylesheet" href="site.css">
+<style>
+/* ---------------------------------------------------------------------------
+   The studio page. One authored moment — the mark assembling itself — and then
+   quiet, precise structure underneath it.
+   --------------------------------------------------------------------------- */
+
+/* --- hero ----------------------------------------------------------------
+   The shell is in site.css; this page only supplies the colour of the light
+   the mark stands under. */
+
+.hero {
+  --hero-light: #7fd8e824;
+}
+
+.hero-mark {
+  width: clamp(132px, 16vw, 184px);
+  height: auto;
+  margin: 0 auto clamp(28px, 3.4vw, 44px);
+  overflow: visible;
+}
+
+/* Restraint at size: the display face carries the page at 500, not 600. */
+.hero h1 {
+  font-weight: 500;
+  margin-bottom: 22px;
+}
+
+.hero__sub {
+  margin: 0 auto;
+  max-width: 46ch;
+  font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+  color: var(--mid);
+  text-wrap: balance;
+}
+
+/* --- the two kinds ------------------------------------------------------
+   The headline's claim, made structural: the real taxonomy of what the studio
+   makes, and which product is which. It is a table, not a second navigation
+   bar — the products have exactly one link each, in the header above and in
+   their own sections below. */
+
+.kinds {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: clamp(44px, 5.5vw, 68px);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  text-align: left;
+}
+
+.kinds > div {
+  padding: 22px 22px 24px;
+}
+
+.kinds > div + div {
+  border-left: 1px solid var(--hairline);
+}
+
+.kind__name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--hi);
+}
+
+.kind__kind {
+  display: block;
+  margin-top: 2px;
+}
+
+.kind__what {
+  margin-top: 12px;
+  font-size: 0.9375rem;
+  color: var(--mid);
+}
+
+@media (max-width: 560px) {
+  .kinds {
+    grid-template-columns: 1fr;
+  }
+
+  .kinds > div + div {
+    border-left: 0;
+    border-top: 1px solid var(--hairline);
+  }
+}
+
+/* --- the Celestile panel -------------------------------------------------
+   Text on the left, the game itself on the right. A studio page that shows no
+   game is just an assertion. */
+
+.product__grid {
+  display: grid;
+  gap: clamp(44px, 5vw, 72px);
+  align-items: start;
+}
+
+@media (min-width: 920px) {
+  .product__grid {
+    grid-template-columns: minmax(0, 1fr) 296px;
+  }
+}
+
+.product__shot img {
+  width: 100%;
+  max-width: 296px;
+  margin-inline: auto;
+}
+
+.product__shot figcaption {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--low);
+}
+
+.product__head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.product__icon {
+  width: 92px;
+  height: 92px;
+  flex: none;
+  border-radius: var(--radius-icon);
+  border: 1px solid var(--hairline);
+}
+
+.product__lede {
+  margin-top: 28px;
+  font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
+  color: var(--mid);
+}
+
+/* The spec list. Hairline rows with a fixed key column: a measuring device,
+   which is what this page's whole visual language is built from. */
+.spec {
+  margin: 40px 0 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.spec__row {
+  display: grid;
+  grid-template-columns: 168px 1fr;
+  gap: 4px 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.spec__row dt {
+  margin: 0;
+}
+
+.spec__row dd {
+  margin: 0;
+  color: var(--hi);
+  font-size: 1rem;
+}
+
+.spec__row dd b {
+  color: var(--celestile);
+  font-weight: 600;
+}
+
+@media (max-width: 560px) {
+  .spec__row {
+    grid-template-columns: 1fr;
+    padding: 14px 0;
+  }
+}
+
+.product__actions {
+  margin-top: 36px;
+}
+
+/* Timber Frenzy: one verified fact exists about it, so it gets one hairline
+   row rather than a box sized for content that is not there. The rule is
+   tinted with the product's own accent — the only place that colour appears. */
+.also {
+  display: grid;
+  gap: 10px clamp(40px, 6vw, 88px);
+  margin-top: clamp(64px, 8vw, 104px);
+  padding-top: 30px;
+  border-top: 1px solid color-mix(in srgb, var(--timber) 36%, transparent);
+}
+
+@media (min-width: 900px) {
+  .also {
+    grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+  }
+}
+
+.also h2 {
+  font-size: clamp(1.375rem, 2.4vw, 1.75rem);
+}
+
+.also p + p {
+  margin-top: 8px;
+}
+
+.also__note {
+  font-size: 0.9375rem;
+  color: var(--low);
+}
+
+/* --- studio note --------------------------------------------------------
+   Uses the shared .split layout; only the type size and the emphasis colour
+   are local. */
+
+.note__body p {
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  max-width: 62ch;
+}
+
+.note__body strong {
+  color: var(--hi);
+  font-weight: 600;
+}
+
+/* --- the mark's motion ---------------------------------------------------
+   One orchestrated sequence, roughly a second, once per load. The base state
+   is the finished mark and every keyframe supplies only the "from", so if
+   animation is switched off entirely the mark is still correct. */
+
+@keyframes markDraw {
+  from { stroke-dashoffset: var(--len); }
+}
+
+@keyframes markFace {
+  from { opacity: 0; transform: translate(var(--fx), var(--fy)); }
+}
+
+@keyframes markFade {
+  from { opacity: 0; }
+}
+
+@keyframes visorBlink {
+  0%, 95.8%, 100% { opacity: 1; }
+  97.2% { opacity: 0.06; }
+  98.6% { opacity: 1; }
+}
+
+.m-tile {
+  --len: 167;
+  stroke-dasharray: 167;
+  animation: markDraw 520ms var(--ease-out) both;
+}
+
+.m-tile-fill,
+.m-halo {
+  animation: markFade 620ms ease 380ms both;
+}
+
+.m-face {
+  animation: markFace 380ms var(--ease-out) both;
+}
+
+.m-face--top { --fx: 0px; --fy: -9px; animation-delay: 180ms; }
+.m-face--left { --fx: -9px; --fy: 5px; animation-delay: 240ms; }
+.m-face--right { --fx: 9px; --fy: 5px; animation-delay: 300ms; }
+
+.m-shadow {
+  animation: markFade 300ms ease 240ms both;
+}
+
+/* "Frosty" is a behaviour, not a drawn snowflake: a cold line crystallises
+   around the head's silhouette after the volume lands. Hero only — at nav size
+   the same 1.6px stroke blows out into a white halo, so assets/frs-mark.svg
+   omits it. */
+.m-frost {
+  --len: 145;
+  stroke-dasharray: 145;
+  animation: markDraw 620ms var(--ease-out) 520ms both;
+}
+
+.m-visor {
+  animation: markFade 260ms ease 800ms both;
+}
+
+/* Rare enough to be personality rather than a tic: once every nine seconds. */
+.m-visor__lit {
+  animation: visorBlink 9s linear 2.4s infinite;
+  filter: drop-shadow(0 0 2.5px #7fd8e8cc);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Every part lands in its finished state at once and the mark as a whole
+     fades up. The !important is required to survive the global duration
+     override in site.css, which would otherwise collapse this fade to 0.01ms
+     and leave a hard pop. */
+  .hero-mark * {
+    animation: none !important;
+  }
+
+  .hero-mark {
+    animation: markFade 240ms ease both !important;
+  }
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Frosty Robot Studio</h1>
-        <p>Welcome! We are an independent studio building turn-based strategy games for phones and tablets.</p>
+<div class="nav-sentinel" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+<div class="field" aria-hidden="true"></div>
 
-        <hr>
+<header class="nav" id="nav">
+  <div class="shell nav__inner">
+    <a class="brand" href="./" aria-current="page">
+      <img class="brand__mark" src="assets/frs-mark.svg" alt="" width="26" height="26">
+      Frosty Robot Studio
+    </a>
+    <!-- One link, one destination. Timber Frenzy is named in the first
+         viewport by the two-kinds table; a second nav item pointing at an
+         anchor while this one points at a page would be two different kinds of
+         "Celestile" in one bar. -->
+    <nav class="nav__links" aria-label="Products">
+      <a class="nav__link" href="celestile/">Celestile</a>
+    </nav>
+  </div>
+</header>
 
-        <div class="games">
-            <h2>Celestile</h2>
-            <p>A turn-based 4X strategy game. Expand across a cluster of worlds, research five
-            disciplines of technology, and win by conquest or by score.</p>
-            <p class="legal">
-                <a href="celestile/privacy.html">Privacy Policy</a> ·
-                <a href="celestile/terms.html">Terms of Use</a>
-            </p>
+<main id="main" tabindex="-1">
+
+  <!-- ===== hero ===== -->
+  <section class="hero">
+    <div class="shell hero__inner">
+
+      <svg class="hero-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <defs>
+          <radialGradient id="frostHalo" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#7fd8e8" stop-opacity="0.32"/>
+            <stop offset="100%" stop-color="#7fd8e8" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <ellipse class="m-halo" cx="50" cy="70" rx="46" ry="25" fill="url(#frostHalo)"/>
+        <polygon class="m-tile-fill" points="50,58 87,77 50,96 13,77" fill="#0d1c24" fill-opacity="0.6"/>
+        <polygon class="m-tile" points="50,58 87,77 50,96 13,77"
+                 fill="none" stroke="#7fd8e8" stroke-width="5" stroke-linejoin="round"/>
+        <!-- Contact shadow, the device the game's own board draws under every
+             world: without it the head hovers instead of resting in the tile. -->
+        <ellipse class="m-shadow" cx="50" cy="69" rx="17" ry="6" fill="#04060b" opacity="0.7"/>
+        <polygon class="m-face m-face--top" points="50,24 72,36 50,48 28,36" fill="#7ab4cc"/>
+        <polygon class="m-face m-face--left" points="28,36 50,48 50,70 28,58" fill="#3d6a85"/>
+        <polygon class="m-face m-face--right" points="50,48 72,36 72,58 50,70" fill="#254256"/>
+        <path class="m-frost" d="M50 24 L72 36 L72 58 L50 70 L28 58 L28 36 Z"
+              fill="none" stroke="#d8f6ff" stroke-width="1.6" stroke-linejoin="round" stroke-opacity="0.85"/>
+        <g class="m-visor">
+          <polygon points="30.42,43.04 46.04,51.56 46.04,58.76 30.42,50.24" fill="#0b1a24"/>
+          <polygon class="m-visor__lit" points="31.41,44.50 45.05,51.94 45.05,56.94 31.41,49.50" fill="#d8f6ff"/>
+        </g>
+      </svg>
+
+      <h1>Two kinds of patience.</h1>
+      <p class="hero__sub">
+        Frosty Robot Studio makes turn-based strategy and idle games for phones
+        and tablets. One asks you to think. One keeps working while you don&rsquo;t.
+      </p>
+
+      <div class="kinds">
+        <div>
+          <span class="kind__name">Celestile</span>
+          <span class="kind__kind label">Turn-based</span>
+          <p class="kind__what">You get the whole board and all the time you want. Every fight tells you its result before you commit to it.</p>
         </div>
-
-        <div class="games">
-            <h2>Timber Frenzy</h2>
-            <p>An idle chopping game.</p>
+        <div>
+          <span class="kind__name">Timber Frenzy</span>
+          <span class="kind__kind label">Idle</span>
+          <p class="kind__what">You set a rate going and leave. The work carries on while the phone is in your pocket.</p>
         </div>
+      </div>
+
     </div>
+  </section>
+
+  <!-- ===== Celestile ===== -->
+  <section class="band" id="celestile" aria-labelledby="celestile-h">
+    <div class="shell product__grid">
+      <div>
+
+        <div class="product__head">
+          <img class="product__icon" src="assets/celestile-icon-320.webp"
+               alt="Celestile app icon: a low-poly world resting on an isometric tile"
+               width="92" height="92" loading="lazy" decoding="async">
+          <h2 id="celestile-h">Celestile</h2>
+        </div>
+
+        <p class="product__lede">
+          A turn-based 4X strategy game. Claim a cluster of space one tile at a
+          time &mdash; expand, build, research and out-think up to fourteen rival
+          empires across an isometric board of space, asteroids, moons, planets
+          and suns &mdash; then win by holding every planet, or by finishing
+          ahead of all of them inside forty rounds.
+        </p>
+
+        <dl class="spec">
+          <div class="spec__row">
+            <dt class="label">Combat</dt>
+            <dd><b>Deterministic.</b> The forecast above a fight is the result. No dice.</dd>
+          </div>
+          <div class="spec__row">
+            <dt class="label">Two ways to win</dt>
+            <dd>Domination &mdash; hold every planet. Ascendancy &mdash; finish ahead inside 40 rounds.</dd>
+          </div>
+          <div class="spec__row">
+            <dt class="label">Choices</dt>
+            <dd>8 factions, each with one real strength and one real cost. 8 unit classes. 15 technologies.</dd>
+          </div>
+          <div class="spec__row">
+            <dt class="label">Plays</dt>
+            <dd>Single-player and offline. No account, no connection, no chat.</dd>
+          </div>
+          <div class="spec__row">
+            <dt class="label">Ships in</dt>
+            <dd>Nine languages, with 63 achievements and a career record that persists.</dd>
+          </div>
+        </dl>
+
+        <!-- One action. Privacy and Terms live in the footer and, prominently,
+             on the Celestile page itself; repeating them here would flatten the
+             hierarchy of the only thing this section is asking for. -->
+        <p class="product__actions">
+          <a class="btn btn--celestile" href="celestile/">See Celestile</a>
+        </p>
+
+      </div>
+
+      <figure class="product__shot">
+        <img class="frame" src="celestile/shots/hero-board.webp"
+             alt="A Celestile match in progress: an isometric board of planets, moons and asteroids, with one green zone of control drawn around a claimed world."
+             width="720" height="1561" loading="lazy" decoding="async">
+        <figcaption>Round 12. The green outline is a zone of control.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===== Timber Frenzy ===== -->
+  <section id="timber-frenzy" aria-labelledby="timber-h">
+    <div class="shell">
+      <div class="also">
+        <h2 id="timber-h">Timber Frenzy</h2>
+        <div>
+          <p>An idle chopping game.</p>
+          <p class="also__note">More to show when there is more to show.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== studio note ===== -->
+  <section class="band" aria-labelledby="studio-h">
+    <div class="shell split">
+      <h2 id="studio-h">One small studio</h2>
+      <div class="split__body note__body">
+        <p>
+          Frosty Robot Studio is independent. We build for phones first &mdash;
+          Celestile is portrait, one-handed, and plays with no connection at
+          all &mdash; and we finish games rather than operate them. Version 1.0
+          is the whole game: nothing time-gated, nothing to subscribe to.
+        </p>
+        <p>
+          The two things we make have the same idea underneath. A turn-based
+          game shows you a forecast; an idle game shows you a rate. Both are
+          promises, and a game is only as good as how exactly it keeps them.
+          <strong>Celestile keeps its one literally: the number above a fight is
+          the number you get, every time.</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- TODO: add a contact route (studio email or an issues link) once one exists.
+     Deliberately left out rather than invented. -->
+<footer class="foot">
+  <div class="shell foot__inner">
+    <p class="foot__note">&copy; 2026 Frosty Robot Studio</p>
+    <ul class="foot__links" role="list">
+      <li><a href="celestile/">Celestile</a></li>
+      <li><a href="celestile/privacy.html">Privacy</a></li>
+      <li><a href="celestile/terms.html">Terms</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="site.js" defer></script>
 </body>
 </html>

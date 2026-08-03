@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Frosty Robot Studio">
+  <title>Frosty Robot Studio</title>
+  <!-- An isometric tile with a robot head resting in it. Same construction and
+       the same diamond coordinates as Celestile's mark, so the two are
+       siblings; the ice palette and the visor are what make this one the
+       studio's. No frost rim in this copy — at the 26px nav size a 1.6px stroke
+       blows into a white halo and eats the face. -->
+  <polygon points="50,58 87,77 50,96 13,77" fill="#0d1c24" fill-opacity="0.55"
+           stroke="#7fd8e8" stroke-width="5" stroke-linejoin="round"/>
+  <!-- Contact shadow, the same device the game's board draws under every world:
+       without it the head hovers over the tile instead of sitting in it. -->
+  <ellipse cx="50" cy="69" rx="17" ry="6" fill="#04060b" opacity="0.7"/>
+  <!-- Cube: top face catches the light, the two lower faces fall away. -->
+  <polygon points="50,24 72,36 50,48 28,36" fill="#7ab4cc"/>
+  <polygon points="28,36 50,48 50,70 28,58" fill="#3d6a85"/>
+  <polygon points="50,48 72,36 72,58 50,70" fill="#254256"/>
+  <!-- The visor, aligned to the near face's own axes. One lit band survives
+       26px where two small eyes did not. -->
+  <polygon points="30.42,43.04 46.04,51.56 46.04,58.76 30.42,50.24" fill="#0b1a24"/>
+  <polygon points="31.41,44.50 45.05,51.94 45.05,56.94 31.41,49.50" fill="#d8f6ff"/>
+</svg>

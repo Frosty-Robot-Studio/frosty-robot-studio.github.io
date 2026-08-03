@@ -1,0 +1,588 @@
+/* Frosty Robot Studio — shared foundation.
+   Loaded by index.html and celestile/index.html.
+
+   The split: this file owns the token system and every construct that appears
+   on both pages — nav, buttons, footer, hero shell, image frames, the layout
+   primitives, the isometric field, focus and reduced motion. A page's <style>
+   block owns only what exists on that page alone, plus the token values that
+   make it that page.
+
+   Token names describe roles, not brands, because the Celestile page becomes
+   the game purely by re-pointing them: --bg, --surface, --accent and the text
+   ramp are filled in with the studio's ice values here and with the game's own
+   palette there. The two product colours are named after the products, because
+   those are stable facts rather than roles. */
+
+/* --- display face -------------------------------------------------------
+   Space Grotesk is Celestile's own display face, self-hosted from the game
+   repo. Using it means the studio's voice is literally the product's voice
+   rather than a font picked off a shelf — and it costs one 22 KB request from
+   our own origin. No third-party font host: this site makes zero external
+   requests. The URL resolves against this stylesheet, so celestile/ gets it. */
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('fonts/space-grotesk-latin.woff2') format('woff2');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Ground. The studio's is a blue-biased ice; Celestile re-points these. */
+  --bg: #06080e;
+  --bg-raised: #0b0f18;
+  --surface: #131926;
+  --hairline: #ffffff1a;
+  --hairline-strong: #ffffff2e;
+
+  /* Text ramp. --low is the floor: 7.6:1 on --bg, 6.7:1 on --surface. */
+  --hi: #f4f7fb;
+  --mid: #b6c1d2;
+  --low: #94a1b5;
+
+  /* The interface accent: links, focus rings, the lattice, the primary button.
+     Ice cyan for the studio; the game's teal on the Celestile page. */
+  --accent: #7fd8e8;
+
+  /* Product colours. Each names a product rather than a role, and each appears
+     only where that product does. */
+  --celestile: #45c46a;
+  --timber: #e2a44a;
+
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+
+  /* One curve. Everything on this site is either entering or responding to a
+     press, and both want a strong ease-out. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+  --shell: 1120px;
+  --gutter: clamp(20px, 5vw, 48px);
+  --band: clamp(88px, 11vw, 156px);
+  --nav-h: 64px;
+
+  /* Radii, by the kind of object each belongs to. */
+  --radius-frame: 20px;  /* a screenshot */
+  --radius-icon: 22px;   /* an app icon */
+  --radius-panel: 14px;  /* a panel or table container */
+  --radius-control: 10px; /* a button or badge */
+
+  /* Near-black page: tell the UA so scrollbars and default controls match. */
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--mid);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* --- type ---------------------------------------------------------------- */
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  color: var(--hi);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  margin: 0;
+  text-wrap: balance;
+  /* Display type runs to 88px; one long product name would otherwise push the
+     page sideways at 320px. */
+  overflow-wrap: break-word;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 7vw, 5.25rem);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+}
+
+h3 {
+  font-size: clamp(1.125rem, 1.7vw, 1.375rem);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+p {
+  margin: 0;
+  max-width: 68ch;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* The utility voice: spec keys, table keys, captions. Space Grotesk small with
+   wide tracking, and tabular figures so numbers line up. Never used as a kicker
+   above a heading. */
+.label {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--low);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- focus & skip -------------------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  z-index: 100;
+  padding: 12px 18px;
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+  border-radius: var(--radius-control);
+  text-decoration: none;
+  /* transform, not top: top is a layout property and would trigger layout,
+     paint and composite for what is a pure movement. */
+  transform: translateY(-140px);
+  transition: transform 180ms var(--ease-out);
+}
+
+.skip:focus {
+  transform: translateY(0);
+}
+
+/* The skip target takes focus programmatically, so it needs tabindex="-1" in
+   the markup and must not then draw a ring when clicked into. */
+#main:focus {
+  outline: none;
+}
+
+/* --- layout -------------------------------------------------------------- */
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+.band {
+  padding-block: var(--band) 0;
+}
+
+/* Anything an anchor can land on has to clear the sticky bar. */
+[id] {
+  scroll-margin-top: calc(var(--nav-h) + 32px);
+}
+
+/* Watched by site.js to decide when the nav has something behind it. Authored
+   here rather than injected so the mechanism is visible in the markup. */
+.nav-sentinel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+/* --- the editorial split -------------------------------------------------
+   Used only where the body is a long list the heading captions. A rail beside
+   two lines of prose is dead space, so short sections use .stage or set their
+   heading full width instead.
+
+   Section-internal spacing is owned by exactly two rules — this one and
+   .stage's — plus the first-child margins of the blocks themselves. */
+
+.split {
+  display: grid;
+  gap: 22px clamp(40px, 6vw, 88px);
+}
+
+@media (min-width: 900px) {
+  .split {
+    grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  /* The heading rides down beside a long list instead of leaving a column of
+     nothing under it. Sticky inside its own grid row, so it releases at the end
+     of its section rather than colliding with the next one. */
+  .split > h2 {
+    position: sticky;
+    top: calc(var(--nav-h) + 40px);
+  }
+}
+
+.split__body > * + * {
+  margin-top: 22px;
+}
+
+/* Centred composition, for a section that is one object rather than a list. */
+.stage {
+  text-align: center;
+}
+
+.stage > * + * {
+  margin-top: 26px;
+}
+
+.stage p {
+  margin-inline: auto;
+  max-width: 60ch;
+}
+
+/* --- hero ----------------------------------------------------------------
+   Both pages open the same way: a centred column under one soft light from
+   above. Only the colour of the light differs, so only the colour is set per
+   page. */
+
+.hero {
+  position: relative;
+  text-align: center;
+  padding-block: clamp(40px, 6vw, 76px) 0;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -165px;
+  left: 50%;
+  width: min(820px, 100%);
+  height: 650px;
+  transform: translateX(-50%);
+  background: radial-gradient(50% 50% at 50% 43%, var(--hero-light, transparent) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+}
+
+/* --- image frame ---------------------------------------------------------
+   One treatment for every screenshot on the site. */
+
+.frame {
+  height: auto;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-frame);
+}
+
+/* --- nav ----------------------------------------------------------------- */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: color-mix(in srgb, var(--bg) 84%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 200ms ease;
+}
+
+/* Phones are where the blur costs most and buys least — the 84%-opaque colour
+   already separates the bar from the page on its own. */
+@media (max-width: 700px) {
+  .nav {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: color-mix(in srgb, var(--bg) 94%, transparent);
+  }
+}
+
+/* The rule only appears once there is content behind the bar to separate it
+   from — before that it would be a line under nothing. */
+.nav.is-stuck {
+  border-bottom-color: var(--hairline);
+}
+
+.nav__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  min-height: var(--nav-h);
+  padding-block: 8px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  padding-block: 10px;
+}
+
+.brand:hover {
+  color: var(--hi);
+}
+
+.brand__mark {
+  width: 26px;
+  height: 26px;
+  flex: none;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+/* One quiet 44px text control, used by the nav and the footer. They were two
+   identical definitions before; a single rule stops them drifting apart. */
+.nav__link,
+.foot__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 12px;
+  color: var(--mid);
+  font-size: 0.9375rem;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.nav__link:hover,
+.foot__links a:hover {
+  color: var(--hi);
+  background-color: var(--hairline);
+}
+
+@media (max-width: 400px) {
+  .brand {
+    font-size: 0.75rem;
+    gap: 8px;
+  }
+
+  .nav__link {
+    padding: 0 9px;
+    font-size: 0.875rem;
+  }
+}
+
+/* --- buttons ------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 22px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 160ms var(--ease-out), background-color 160ms ease,
+    border-color 160ms ease, color 160ms ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn--primary {
+  background-color: var(--accent);
+  color: var(--bg);
+}
+
+.btn--ghost {
+  background-color: transparent;
+  border-color: var(--hairline-strong);
+  color: var(--hi);
+}
+
+.btn--celestile {
+  background-color: var(--celestile);
+  color: #04170b;
+}
+
+/* The Attack button ships disabled and is enabled by site.js, so a visitor
+   without scripting sees a control that says it is unavailable rather than one
+   that looks live and does nothing. */
+.btn:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.btn:disabled:active {
+  transform: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn--primary:not(:disabled):hover {
+    background-color: color-mix(in srgb, var(--accent) 84%, #ffffff);
+  }
+
+  .btn--celestile:not(:disabled):hover {
+    background-color: color-mix(in srgb, var(--celestile) 84%, #ffffff);
+  }
+
+  .btn--ghost:not(:disabled):hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+/* --- footer -------------------------------------------------------------- */
+
+.foot {
+  margin-top: var(--band);
+  border-top: 1px solid var(--hairline);
+}
+
+.foot__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 32px;
+  padding-block: 32px 44px;
+}
+
+.foot__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.foot__note {
+  font-size: 0.875rem;
+  color: var(--low);
+}
+
+/* --- the isometric field -------------------------------------------------
+   Two line sets at the board's own angles. Not a decorative grid overlay: an
+   isometric lattice is literally the surface these games are drawn on, and the
+   radial mask fades it out below the hero so it reads as a surface the page is
+   standing on rather than as wallpaper. Shared by both pages, tinted by
+   whichever accent that page has set. */
+
+.field {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(30deg, color-mix(in srgb, var(--accent) 7%, transparent) 0 1px, transparent 1px 74px),
+    repeating-linear-gradient(150deg, color-mix(in srgb, var(--accent) 7%, transparent) 0 1px, transparent 1px 74px);
+  -webkit-mask-image: radial-gradient(120% 74% at 50% 22%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(120% 74% at 50% 22%, #000 0%, transparent 72%);
+}
+
+/* --- reduced motion ------------------------------------------------------
+   Fewer and gentler, not zero. Movement goes; colour, opacity and the press
+   feedback that tells you the interface heard you all stay.
+
+   The transition override lists properties rather than shortening durations:
+   transition-property initialises to `all`, so setting a duration on `*` would
+   hand reduced-motion users MORE transition surface than everyone else. */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-property: opacity, color, background-color, border-color, fill,
+      stroke, box-shadow !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Press feedback stops being a movement and becomes a colour change. The
+     filled variants darken rather than being re-coloured, because overriding
+     background-color here outranks the variant classes and would erase them. */
+  .btn:active {
+    transform: none;
+  }
+
+  .btn--ghost:active {
+    background-color: var(--hairline);
+  }
+
+  .btn--primary:not(:disabled):active {
+    background-color: color-mix(in srgb, var(--accent) 74%, #000);
+  }
+
+  .btn--celestile:not(:disabled):active {
+    background-color: color-mix(in srgb, var(--celestile) 74%, #000);
+  }
+
+  .skip {
+    transition: none;
+  }
+}
+
+/* --- forced colours ------------------------------------------------------
+   Windows High Contrast replaces every colour but leaves background-image
+   alone, so anything that draws with a background or a gap disappears while
+   the decorative gradients survive as noise. Both halves need saying. */
+
+@media (forced-colors: active) {
+  .field {
+    display: none;
+  }
+
+  .nav.is-stuck {
+    border-bottom-color: CanvasText;
+  }
+
+  .frame {
+    border-color: CanvasText;
+  }
+}
