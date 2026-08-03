@@ -14,7 +14,10 @@
   var ORDER = ['en', 'es', 'ru', 'de', 'fr', 'pt', 'hi', 'ko', 'ja'];
   var STORE = 'celestile.legal.lang';
   var EMAIL = 'frostyrobotstudio@anglernook.com';
-  var ADDRESS = '2752 E Wardway Dr, Holladay, UT 84124, United States';
+  // The studio's registered business address. Both documents name it as the
+  // contact for data-deletion and rights requests, so it has to be the address
+  // that actually reaches the company.
+  var ADDRESS = '7533 S Center View Ct, Ste R, West Jordan, UT 84084, United States';
   var doc = document.body.dataset.doc; // 'privacy' | 'terms'
 
   var available = ORDER.filter(function (id) {
