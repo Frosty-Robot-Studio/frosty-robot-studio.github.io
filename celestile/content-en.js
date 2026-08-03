@@ -14,12 +14,12 @@ window.CELESTILE_LEGAL.en = {
   updatedLabel: 'Last updated',
   updated: '2 August 2026',
   otherDoc: { privacy: 'Privacy Policy', terms: 'Terms of Use' },
-  footer: 'Celestile is a product of Frosty Robot Studio.',
+  footer: 'Celestile is a product of Frosty Robot Studio LLC.',
 
   privacy: {
     title: 'Privacy Policy',
     intro: [
-      'This Privacy Policy explains how Frosty Robot Studio (“we”, “us”) handles information when you play <strong>Celestile</strong> (the “Game”) on iOS or Android.',
+      'This Privacy Policy explains how Frosty Robot Studio LLC (“we”, “us”) handles information when you play <strong>Celestile</strong> (the “Game”) on iOS or Android.',
       'Celestile has no account and no login. We do not ask for your name, email address, phone number or date of birth. We do not run a server that stores your game, and we do not collect analytics about how you play.',
     ],
     sections: [
@@ -135,7 +135,7 @@ window.CELESTILE_LEGAL.en = {
   terms: {
     title: 'Terms of Use',
     intro: [
-      'These Terms of Use are an agreement between you and Frosty Robot Studio covering <strong>Celestile</strong> (the “Game”).',
+      'These Terms of Use are an agreement between you and Frosty Robot Studio LLC covering <strong>Celestile</strong> (the “Game”).',
       '<strong>By downloading, installing or playing the Game, you agree to these Terms.</strong> If you do not agree, do not play it.',
     ],
     sections: [
@@ -160,7 +160,7 @@ window.CELESTILE_LEGAL.en = {
       {
         h: 'Our intellectual property',
         body: [
-          'The Game — its code, artwork, interface, rules, factions, unit and technology designs, text, sounds and the name <strong>Celestile</strong> — belongs to Frosty Robot Studio or its licensors, and is protected by copyright and trade mark law. Nothing in these Terms transfers ownership of any of it to you.',
+          'The Game — its code, artwork, interface, rules, factions, unit and technology designs, text, sounds and the name <strong>Celestile</strong> — belongs to Frosty Robot Studio LLC or its licensors, and is protected by copyright and trade mark law. Nothing in these Terms transfers ownership of any of it to you.',
         ],
       },
       {
@@ -207,7 +207,7 @@ window.CELESTILE_LEGAL.en = {
       {
         h: 'Limitation of liability',
         body: [
-          'To the fullest extent permitted by law, Frosty Robot Studio is not liable for any indirect, incidental, special, consequential or punitive damages, or for any loss of data, progress, profits or goodwill, arising out of your use of the Game.',
+          'To the fullest extent permitted by law, Frosty Robot Studio LLC is not liable for any indirect, incidental, special, consequential or punitive damages, or for any loss of data, progress, profits or goodwill, arising out of your use of the Game.',
           'Our total liability to you for any claim relating to the Game is limited to the greater of the amount you paid us for it in the twelve months before the claim, or US$10.',
           'Nothing in these Terms excludes liability for death or personal injury caused by negligence, for fraud, or for anything else that cannot lawfully be excluded.',
         ],
@@ -215,7 +215,7 @@ window.CELESTILE_LEGAL.en = {
       {
         h: 'Apple and Google',
         body: [
-          'These Terms are between you and Frosty Robot Studio only. Apple and Google are not parties to them and have no responsibility for the Game.',
+          'These Terms are between you and Frosty Robot Studio LLC only. Apple and Google are not parties to them and have no responsibility for the Game.',
           [
             'Apple and Google have no obligation to provide any maintenance or support for the Game.',
             'If the Game fails to conform to any applicable warranty, you may notify Apple, and Apple may refund the purchase price; beyond that, Apple has no other warranty obligation.',

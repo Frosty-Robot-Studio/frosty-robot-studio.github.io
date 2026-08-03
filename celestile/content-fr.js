@@ -5,12 +5,12 @@ window.CELESTILE_LEGAL.fr = {
   updatedLabel: 'Dernière mise à jour',
   updated: '2 août 2026',
   otherDoc: { privacy: 'Politique de confidentialité', terms: 'Conditions d’utilisation' },
-  footer: 'Celestile est un produit de Frosty Robot Studio.',
+  footer: 'Celestile est un produit de Frosty Robot Studio LLC.',
 
   privacy: {
     title: 'Politique de confidentialité',
     intro: [
-      'La présente Politique de confidentialité explique comment Frosty Robot Studio (« nous ») traite les informations lorsque vous jouez à <strong>Celestile</strong> (le « Jeu ») sur iOS ou Android.',
+      'La présente Politique de confidentialité explique comment Frosty Robot Studio LLC (« nous ») traite les informations lorsque vous jouez à <strong>Celestile</strong> (le « Jeu ») sur iOS ou Android.',
       'Celestile ne comporte ni compte ni connexion. Nous ne demandons ni votre nom, ni votre adresse e-mail, ni votre numéro de téléphone, ni votre date de naissance. Nous n’exploitons aucun serveur qui conserve votre partie et nous ne collectons aucune donnée analytique sur votre façon de jouer.',
     ],
     sections: [
@@ -123,7 +123,7 @@ window.CELESTILE_LEGAL.fr = {
   terms: {
     title: 'Conditions d’utilisation',
     intro: [
-      'Les présentes Conditions d’utilisation constituent un accord entre vous et Frosty Robot Studio concernant <strong>Celestile</strong> (le « Jeu »).',
+      'Les présentes Conditions d’utilisation constituent un accord entre vous et Frosty Robot Studio LLC concernant <strong>Celestile</strong> (le « Jeu »).',
       '<strong>En téléchargeant, en installant ou en jouant au Jeu, vous acceptez ces Conditions.</strong> Si vous ne les acceptez pas, n’y jouez pas.',
     ],
     sections: [
@@ -148,7 +148,7 @@ window.CELESTILE_LEGAL.fr = {
       {
         h: 'Notre propriété intellectuelle',
         body: [
-          'Le Jeu — son code, ses graphismes, son interface, ses règles, ses factions, la conception de ses unités et technologies, ses textes, ses sons et le nom <strong>Celestile</strong> — appartient à Frosty Robot Studio ou à ses concédants, et est protégé par le droit d’auteur et le droit des marques. Rien dans les présentes Conditions ne vous en transfère la propriété.',
+          'Le Jeu — son code, ses graphismes, son interface, ses règles, ses factions, la conception de ses unités et technologies, ses textes, ses sons et le nom <strong>Celestile</strong> — appartient à Frosty Robot Studio LLC ou à ses concédants, et est protégé par le droit d’auteur et le droit des marques. Rien dans les présentes Conditions ne vous en transfère la propriété.',
         ],
       },
       {
@@ -195,7 +195,7 @@ window.CELESTILE_LEGAL.fr = {
       {
         h: 'Limitation de responsabilité',
         body: [
-          'Dans toute la mesure permise par la loi, Frosty Robot Studio n’est pas responsable des dommages indirects, accessoires, spéciaux, consécutifs ou punitifs, ni de la perte de données, de progression, de bénéfices ou de réputation résultant de votre utilisation du Jeu.',
+          'Dans toute la mesure permise par la loi, Frosty Robot Studio LLC n’est pas responsable des dommages indirects, accessoires, spéciaux, consécutifs ou punitifs, ni de la perte de données, de progression, de bénéfices ou de réputation résultant de votre utilisation du Jeu.',
           'Notre responsabilité totale envers vous pour toute réclamation liée au Jeu est limitée au plus élevé des deux montants suivants : la somme que vous nous avez versée pour le Jeu au cours des douze mois précédant la réclamation, ou 10 USD.',
           'Rien dans les présentes Conditions n’exclut la responsabilité en cas de décès ou de dommage corporel causé par une négligence, en cas de fraude, ou pour tout autre cas ne pouvant légalement être exclu.',
         ],
@@ -203,7 +203,7 @@ window.CELESTILE_LEGAL.fr = {
       {
         h: 'Apple et Google',
         body: [
-          'Les présentes Conditions lient uniquement vous et Frosty Robot Studio. Apple et Google n’y sont pas parties et n’assument aucune responsabilité concernant le Jeu.',
+          'Les présentes Conditions lient uniquement vous et Frosty Robot Studio LLC. Apple et Google n’y sont pas parties et n’assument aucune responsabilité concernant le Jeu.',
           [
             'Apple et Google n’ont aucune obligation d’assurer la maintenance ou l’assistance du Jeu.',
             'Si le Jeu n’est pas conforme à une garantie applicable, vous pouvez en informer Apple, qui pourra vous rembourser le prix d’achat ; au-delà, Apple n’a aucune autre obligation de garantie.',

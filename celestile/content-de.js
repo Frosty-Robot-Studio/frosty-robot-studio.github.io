@@ -5,12 +5,12 @@ window.CELESTILE_LEGAL.de = {
   updatedLabel: 'Zuletzt aktualisiert',
   updated: '2. August 2026',
   otherDoc: { privacy: 'Datenschutzerklärung', terms: 'Nutzungsbedingungen' },
-  footer: 'Celestile ist ein Produkt von Frosty Robot Studio.',
+  footer: 'Celestile ist ein Produkt von Frosty Robot Studio LLC.',
 
   privacy: {
     title: 'Datenschutzerklärung',
     intro: [
-      'Diese Datenschutzerklärung beschreibt, wie Frosty Robot Studio („wir“) mit Informationen umgeht, wenn Sie <strong>Celestile</strong> (das „Spiel“) unter iOS oder Android spielen.',
+      'Diese Datenschutzerklärung beschreibt, wie Frosty Robot Studio LLC („wir“) mit Informationen umgeht, wenn Sie <strong>Celestile</strong> (das „Spiel“) unter iOS oder Android spielen.',
       'Celestile hat kein Konto und keine Anmeldung. Wir fragen weder Ihren Namen noch E-Mail-Adresse, Telefonnummer oder Geburtsdatum ab. Wir betreiben keinen Server, der Ihren Spielstand speichert, und erheben keine Analysedaten zu Ihrem Spielverhalten.',
     ],
     sections: [
@@ -123,7 +123,7 @@ window.CELESTILE_LEGAL.de = {
   terms: {
     title: 'Nutzungsbedingungen',
     intro: [
-      'Diese Nutzungsbedingungen sind eine Vereinbarung zwischen Ihnen und Frosty Robot Studio über <strong>Celestile</strong> (das „Spiel“).',
+      'Diese Nutzungsbedingungen sind eine Vereinbarung zwischen Ihnen und Frosty Robot Studio LLC über <strong>Celestile</strong> (das „Spiel“).',
       '<strong>Mit dem Herunterladen, Installieren oder Spielen des Spiels stimmen Sie diesen Bedingungen zu.</strong> Wenn Sie nicht zustimmen, spielen Sie es bitte nicht.',
     ],
     sections: [
@@ -148,7 +148,7 @@ window.CELESTILE_LEGAL.de = {
       {
         h: 'Unser geistiges Eigentum',
         body: [
-          'Das Spiel — sein Code, die Grafik, die Oberfläche, die Regeln, die Fraktionen, die Einheiten- und Technologieentwürfe, Texte, Klänge und der Name <strong>Celestile</strong> — gehört Frosty Robot Studio oder seinen Lizenzgebern und ist urheber- und markenrechtlich geschützt. Nichts in diesen Bedingungen überträgt Ihnen das Eigentum daran.',
+          'Das Spiel — sein Code, die Grafik, die Oberfläche, die Regeln, die Fraktionen, die Einheiten- und Technologieentwürfe, Texte, Klänge und der Name <strong>Celestile</strong> — gehört Frosty Robot Studio LLC oder seinen Lizenzgebern und ist urheber- und markenrechtlich geschützt. Nichts in diesen Bedingungen überträgt Ihnen das Eigentum daran.',
         ],
       },
       {
@@ -195,7 +195,7 @@ window.CELESTILE_LEGAL.de = {
       {
         h: 'Haftungsbeschränkung',
         body: [
-          'Soweit gesetzlich zulässig, haftet Frosty Robot Studio nicht für mittelbare Schäden, Begleit-, Sonder-, Folge- oder Strafschäden und nicht für den Verlust von Daten, Fortschritt, Gewinn oder Ansehen, die aus Ihrer Nutzung des Spiels entstehen.',
+          'Soweit gesetzlich zulässig, haftet Frosty Robot Studio LLC nicht für mittelbare Schäden, Begleit-, Sonder-, Folge- oder Strafschäden und nicht für den Verlust von Daten, Fortschritt, Gewinn oder Ansehen, die aus Ihrer Nutzung des Spiels entstehen.',
           'Unsere Gesamthaftung Ihnen gegenüber für Ansprüche im Zusammenhang mit dem Spiel ist auf den höheren der folgenden Beträge begrenzt: den Betrag, den Sie uns in den zwölf Monaten vor dem Anspruch dafür gezahlt haben, oder 10 US-Dollar.',
           'Nichts in diesen Bedingungen schließt die Haftung für Tod oder Körperverletzung infolge Fahrlässigkeit, für Arglist oder für sonstige gesetzlich nicht ausschließbare Fälle aus.',
         ],
@@ -203,7 +203,7 @@ window.CELESTILE_LEGAL.de = {
       {
         h: 'Apple und Google',
         body: [
-          'Diese Bedingungen bestehen ausschließlich zwischen Ihnen und Frosty Robot Studio. Apple und Google sind nicht Vertragspartei und tragen keine Verantwortung für das Spiel.',
+          'Diese Bedingungen bestehen ausschließlich zwischen Ihnen und Frosty Robot Studio LLC. Apple und Google sind nicht Vertragspartei und tragen keine Verantwortung für das Spiel.',
           [
             'Apple und Google sind nicht verpflichtet, Wartung oder Support für das Spiel zu leisten.',
             'Entspricht das Spiel einer anwendbaren Gewährleistung nicht, können Sie Apple benachrichtigen; Apple kann Ihnen den Kaufpreis erstatten. Darüber hinaus trifft Apple keine weitere Gewährleistungspflicht.',

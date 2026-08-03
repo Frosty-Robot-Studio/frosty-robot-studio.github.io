@@ -5,12 +5,12 @@ window.CELESTILE_LEGAL.es = {
   updatedLabel: 'Última actualización',
   updated: '2 de agosto de 2026',
   otherDoc: { privacy: 'Política de privacidad', terms: 'Términos de uso' },
-  footer: 'Celestile es un producto de Frosty Robot Studio.',
+  footer: 'Celestile es un producto de Frosty Robot Studio LLC.',
 
   privacy: {
     title: 'Política de privacidad',
     intro: [
-      'Esta Política de privacidad explica cómo Frosty Robot Studio («nosotros») trata la información cuando juegas a <strong>Celestile</strong> (el «Juego») en iOS o Android.',
+      'Esta Política de privacidad explica cómo Frosty Robot Studio LLC («nosotros») trata la información cuando juegas a <strong>Celestile</strong> (el «Juego») en iOS o Android.',
       'Celestile no tiene cuenta ni inicio de sesión. No te pedimos tu nombre, correo electrónico, número de teléfono ni fecha de nacimiento. No tenemos ningún servidor que guarde tu partida y no recopilamos analíticas sobre cómo juegas.',
     ],
     sections: [
@@ -123,7 +123,7 @@ window.CELESTILE_LEGAL.es = {
   terms: {
     title: 'Términos de uso',
     intro: [
-      'Estos Términos de uso constituyen un acuerdo entre tú y Frosty Robot Studio relativo a <strong>Celestile</strong> (el «Juego»).',
+      'Estos Términos de uso constituyen un acuerdo entre tú y Frosty Robot Studio LLC relativo a <strong>Celestile</strong> (el «Juego»).',
       '<strong>Al descargar, instalar o jugar al Juego, aceptas estos Términos.</strong> Si no estás de acuerdo, no juegues.',
     ],
     sections: [
@@ -148,7 +148,7 @@ window.CELESTILE_LEGAL.es = {
       {
         h: 'Nuestra propiedad intelectual',
         body: [
-          'El Juego —su código, arte, interfaz, reglas, facciones, diseños de unidades y tecnologías, textos, sonidos y el nombre <strong>Celestile</strong>— pertenece a Frosty Robot Studio o a sus licenciantes, y está protegido por la legislación de derechos de autor y marcas. Nada en estos Términos te transfiere la titularidad de ninguno de esos elementos.',
+          'El Juego —su código, arte, interfaz, reglas, facciones, diseños de unidades y tecnologías, textos, sonidos y el nombre <strong>Celestile</strong>— pertenece a Frosty Robot Studio LLC o a sus licenciantes, y está protegido por la legislación de derechos de autor y marcas. Nada en estos Términos te transfiere la titularidad de ninguno de esos elementos.',
         ],
       },
       {
@@ -195,7 +195,7 @@ window.CELESTILE_LEGAL.es = {
       {
         h: 'Limitación de responsabilidad',
         body: [
-          'En la máxima medida permitida por la ley, Frosty Robot Studio no será responsable de daños indirectos, incidentales, especiales, consecuentes o punitivos, ni de la pérdida de datos, progreso, beneficios o reputación derivada de tu uso del Juego.',
+          'En la máxima medida permitida por la ley, Frosty Robot Studio LLC no será responsable de daños indirectos, incidentales, especiales, consecuentes o punitivos, ni de la pérdida de datos, progreso, beneficios o reputación derivada de tu uso del Juego.',
           'Nuestra responsabilidad total frente a ti por cualquier reclamación relativa al Juego se limita a la mayor de estas cantidades: lo que nos hayas pagado por él en los doce meses anteriores a la reclamación, o 10 USD.',
           'Nada en estos Términos excluye la responsabilidad por muerte o lesiones personales causadas por negligencia, por dolo, ni por cualquier otro supuesto que no pueda excluirse legalmente.',
         ],
@@ -203,7 +203,7 @@ window.CELESTILE_LEGAL.es = {
       {
         h: 'Apple y Google',
         body: [
-          'Estos Términos se celebran únicamente entre tú y Frosty Robot Studio. Apple y Google no son parte de ellos y no tienen responsabilidad alguna sobre el Juego.',
+          'Estos Términos se celebran únicamente entre tú y Frosty Robot Studio LLC. Apple y Google no son parte de ellos y no tienen responsabilidad alguna sobre el Juego.',
           [
             'Apple y Google no están obligados a prestar mantenimiento ni soporte del Juego.',
             'Si el Juego no se ajusta a alguna garantía aplicable, puedes notificárselo a Apple, y Apple podrá reembolsarte el precio de compra; más allá de eso, Apple no asume ninguna otra obligación de garantía.',

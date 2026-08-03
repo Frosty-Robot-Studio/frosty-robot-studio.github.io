@@ -122,7 +122,7 @@
       if (s.contact) {
         var p = el('p');
         p.innerHTML =
-          'Frosty Robot Studio<br>' +
+          'Frosty Robot Studio LLC<br>' +
           '<a href="mailto:' + EMAIL + '">' + EMAIL + '</a><br>' +
           ADDRESS;
         main.appendChild(p);

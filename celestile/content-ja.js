@@ -5,12 +5,12 @@ window.CELESTILE_LEGAL.ja = {
   updatedLabel: '最終更新',
   updated: '2026年8月2日',
   otherDoc: { privacy: 'プライバシーポリシー', terms: '利用規約' },
-  footer: 'Celestile は Frosty Robot Studio の製品です。',
+  footer: 'Celestile は Frosty Robot Studio LLC の製品です。',
 
   privacy: {
     title: 'プライバシーポリシー',
     intro: [
-      '本プライバシーポリシーは、iOS または Android で <strong>Celestile</strong>（以下「本ゲーム」）をプレイされる際に、Frosty Robot Studio（以下「当スタジオ」）が情報をどのように取り扱うかを説明するものです。',
+      '本プライバシーポリシーは、iOS または Android で <strong>Celestile</strong>（以下「本ゲーム」）をプレイされる際に、Frosty Robot Studio LLC（以下「当スタジオ」）が情報をどのように取り扱うかを説明するものです。',
       '本ゲームにアカウントやログインはありません。氏名、メールアドレス、電話番号、生年月日をお尋ねすることはありません。プレイデータを保存するサーバーは運用しておらず、プレイ状況の分析データも収集していません。',
     ],
     sections: [
@@ -123,7 +123,7 @@ window.CELESTILE_LEGAL.ja = {
   terms: {
     title: '利用規約',
     intro: [
-      '本利用規約は、<strong>Celestile</strong>（以下「本ゲーム」）に関する、お客様と Frosty Robot Studio との間の契約です。',
+      '本利用規約は、<strong>Celestile</strong>（以下「本ゲーム」）に関する、お客様と Frosty Robot Studio LLC との間の契約です。',
       '<strong>本ゲームをダウンロード、インストール、またはプレイされた時点で、本規約に同意されたものとみなします。</strong>同意されない場合は、プレイをお控えください。',
     ],
     sections: [
@@ -148,7 +148,7 @@ window.CELESTILE_LEGAL.ja = {
       {
         h: '当スタジオの知的財産',
         body: [
-          '本ゲーム（コード、アートワーク、インターフェース、ルール、勢力、ユニットおよびテクノロジーのデザイン、テキスト、サウンド、ならびに <strong>Celestile</strong> の名称）は、Frosty Robot Studio またはそのライセンサーに帰属し、著作権法および商標法により保護されています。本規約のいかなる定めも、これらの所有権をお客様に移転するものではありません。',
+          '本ゲーム（コード、アートワーク、インターフェース、ルール、勢力、ユニットおよびテクノロジーのデザイン、テキスト、サウンド、ならびに <strong>Celestile</strong> の名称）は、Frosty Robot Studio LLC またはそのライセンサーに帰属し、著作権法および商標法により保護されています。本規約のいかなる定めも、これらの所有権をお客様に移転するものではありません。',
         ],
       },
       {
@@ -195,7 +195,7 @@ window.CELESTILE_LEGAL.ja = {
       {
         h: '責任の制限',
         body: [
-          '法律で認められる最大限の範囲で、Frosty Robot Studio は、本ゲームの利用に起因する間接損害、付随的損害、特別損害、結果的損害、懲罰的損害、ならびにデータ、進行状況、利益、信用の喪失について責任を負いません。',
+          '法律で認められる最大限の範囲で、Frosty Robot Studio LLC は、本ゲームの利用に起因する間接損害、付随的損害、特別損害、結果的損害、懲罰的損害、ならびにデータ、進行状況、利益、信用の喪失について責任を負いません。',
           '本ゲームに関する請求についての当スタジオの総責任額は、請求前 12 か月間にお客様が当スタジオへお支払いになった金額または 10 米ドルのいずれか大きい額を上限とします。',
           '本規約のいかなる定めも、過失による死亡もしくは人身傷害、詐欺、その他法律上排除できない責任を排除するものではありません。',
         ],
@@ -203,7 +203,7 @@ window.CELESTILE_LEGAL.ja = {
       {
         h: 'Apple および Google について',
         body: [
-          '本規約はお客様と Frosty Robot Studio との間のみで締結されるものです。Apple および Google は当事者ではなく、本ゲームについて何らの責任も負いません。',
+          '本規約はお客様と Frosty Robot Studio LLC との間のみで締結されるものです。Apple および Google は当事者ではなく、本ゲームについて何らの責任も負いません。',
           [
             'Apple および Google は、本ゲームの保守またはサポートを提供する義務を負いません。',
             '本ゲームが適用される保証に適合しない場合、お客様は Apple に通知でき、Apple は購入代金を返金することがあります。それを超えて Apple が保証義務を負うことはありません。',
