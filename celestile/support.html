@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Celestile — Support</title>
+<meta name="description" content="Help with Celestile: restoring purchases, saved games, refunds, ads, languages and reporting a bug. Email frostyrobotstudio@anglernook.com.">
+<meta name="theme-color" content="#07080f">
+<link rel="canonical" href="https://frosty-robot-studio.github.io/celestile/support.html">
+<link rel="icon" href="../assets/frs-mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/celestile-icon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Celestile — Support">
+<meta property="og:description" content="Help with Celestile: restoring purchases, saved games, refunds, ads and reporting a bug.">
+<meta property="og:url" content="https://frosty-robot-studio.github.io/celestile/support.html">
+<meta property="og:image" content="https://frosty-robot-studio.github.io/assets/og-celestile.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../site.css">
+<style>
+/* ---------------------------------------------------------------------------
+   Support. A page someone reaches while annoyed, so it is a list of answers and
+   nothing else: no hero, no marketing, the contact route above the fold.
+   Tokens re-pointed at the game's palette exactly as celestile/index.html does.
+   --------------------------------------------------------------------------- */
+
+:root {
+  --bg: #07080f;
+  --bg-raised: #0d1018;
+  --surface: #181b24;
+  --hi: #f2f4f8;
+  --mid: #b3bac7;
+  --low: #949cab;
+  --accent: #4ad6c4;
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(1px 1px at 18% 14%, #ffffff90, transparent),
+    radial-gradient(1px 1px at 62% 8%, #ffffff70, transparent),
+    radial-gradient(1.5px 1.5px at 84% 26%, #ffffff80, transparent),
+    radial-gradient(1px 1px at 33% 39%, #ffffff60, transparent),
+    radial-gradient(1px 1px at 9% 62%, #ffffff70, transparent),
+    radial-gradient(1.5px 1.5px at 71% 55%, #ffffff60, transparent),
+    radial-gradient(1px 1px at 45% 78%, #ffffff70, transparent),
+    radial-gradient(1px 1px at 92% 88%, #ffffff50, transparent);
+}
+
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 56px) 20px clamp(72px, 9vw, 112px);
+}
+
+.page h1 {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin: 22px 0 10px;
+}
+
+.lede {
+  color: var(--mid);
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  max-width: 56ch;
+}
+
+/* The contact route, first. Anyone on this page wants a human, and burying
+   that under an FAQ only makes them scroll before they email anyway. */
+.contact {
+  margin: 30px 0 8px;
+  padding: 22px 24px;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 7%, var(--bg-raised));
+}
+
+.contact a {
+  font-size: clamp(1.0625rem, 2.2vw, 1.375rem);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.contact p {
+  margin-top: 10px;
+  color: var(--mid);
+  font-size: 0.9375rem;
+}
+
+h2 {
+  font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: clamp(46px, 6vw, 68px) 0 4px;
+}
+
+/* Native disclosure: it is keyboard-operable, findable by the browser's own
+   in-page search, and needs no script. */
+details {
+  border-bottom: 1px solid var(--hairline);
+}
+
+details summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 17px 34px 17px 0;
+  position: relative;
+  color: var(--hi);
+  font-weight: 500;
+}
+
+details summary::-webkit-details-marker { display: none; }
+
+details summary::after {
+  content: '';
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  margin-top: -6px;
+  border-right: 2px solid var(--low);
+  border-bottom: 2px solid var(--low);
+  transform: rotate(45deg);
+  transition: transform 160ms var(--ease-out);
+}
+
+details[open] summary::after { transform: rotate(-135deg); margin-top: -2px; }
+details summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.answer { padding: 0 0 20px; color: var(--mid); }
+.answer p + p, .answer ol, .answer ul { margin-top: 12px; }
+.answer ol, .answer ul { padding-left: 22px; }
+.answer li { margin-bottom: 7px; }
+.answer strong { color: var(--hi); font-weight: 600; }
+
+kbd {
+  font: inherit;
+  color: var(--hi);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 5px;
+  padding: 1px 6px;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  details summary::after { transition: none; }
+}
+
+@media (forced-colors: active) {
+  .contact { border: 1px solid CanvasText; }
+  details { border-bottom: 1px solid CanvasText; }
+}
+</style>
+</head>
+<body>
+<div class="nav-sentinel" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+<div class="stars" aria-hidden="true"></div>
+<div class="field" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="shell nav__inner">
+    <a class="brand" href="../">
+      <img class="brand__mark" src="../assets/frs-mark.svg" alt="" width="26" height="26">
+      Frosty Robot Studio
+    </a>
+    <nav class="nav__links" aria-label="Celestile">
+      <a class="nav__link" href="./">Celestile</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="page">
+
+  <p class="label">Celestile</p>
+  <h1>Support</h1>
+  <p class="lede">
+    Celestile is made by one small studio, so support is one person reading
+    email. Most answers are below; if yours is not, write and you will get a
+    reply from a human.
+  </p>
+
+  <div class="contact">
+    <a href="mailto:frostyrobotstudio@anglernook.com?subject=Celestile%20support">frostyrobotstudio@anglernook.com</a>
+    <p>
+      Usually answered within two business days. Telling us your device, your
+      iOS or Android version, and what you were doing when it went wrong saves
+      a round trip.
+    </p>
+  </div>
+
+  <h2>Purchases</h2>
+
+  <details>
+    <summary>I bought a faction and it is gone</summary>
+    <div class="answer">
+      <p>
+        Open <kbd>Settings</kbd> in the game and tap <strong>Restore
+        Purchases</strong>. Factions are tied to the store account you bought
+        them with, not to the device, so this brings them back after a
+        reinstall or on a new phone.
+      </p>
+      <p>
+        It has to be the same Apple Account or Google account that made the
+        purchase. If you have more than one, that is almost always the reason.
+      </p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Restore Purchases says there is nothing to restore</summary>
+    <div class="answer">
+      <p>Three things cause this, in order of likelihood:</p>
+      <ol>
+        <li>You are signed in to a different store account from the one that paid.</li>
+        <li>The purchase did not complete. Check for a receipt email from Apple or Google — if there is none, you were not charged.</li>
+        <li>The device is offline. Restoring needs a connection even though the game does not.</li>
+      </ol>
+      <p>
+        If you have a receipt and it still will not restore, email us with the
+        receipt and we will sort it out.
+      </p>
+    </div>
+  </details>
+
+  <details>
+    <summary>I want a refund</summary>
+    <div class="answer">
+      <p>
+        Refunds are handled by the store, not by us — we never see your payment
+        details and cannot issue one.
+      </p>
+      <ul>
+        <li>iOS — <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a></li>
+        <li>Android — Google Play, Order history, then Request a refund</li>
+      </ul>
+      <p>
+        If something went wrong on our side, tell us anyway. We will help you
+        make the case.
+      </p>
+    </div>
+  </details>
+
+  <details>
+    <summary>I paid but I am still seeing ads</summary>
+    <div class="answer">
+      <p>
+        Buying any faction removes advertising permanently. If ads are still
+        appearing, the app has not seen the purchase yet: tap
+        <kbd>Settings</kbd> › <strong>Restore Purchases</strong>, then start a
+        match.
+      </p>
+    </div>
+  </details>
+
+  <h2>Your game</h2>
+
+  <details>
+    <summary>My progress disappeared</summary>
+    <div class="answer">
+      <p>
+        <strong>Celestile saves only on your device.</strong> There is no cloud
+        save and no account, which is also why the game needs no connection and
+        asks for nothing about you.
+      </p>
+      <p>
+        The consequence is blunt: deleting the app deletes your progress,
+        records and achievements, and we hold no copy and cannot restore them.
+        Purchases are the exception — those are recorded against your store
+        account and come back with Restore Purchases.
+      </p>
+      <p>
+        If progress vanished <em>without</em> the app being deleted, that is a
+        bug and we want to hear about it.
+      </p>
+    </div>
+  </details>
+
+  <details>
+    <summary>The game is in the wrong language</summary>
+    <div class="answer">
+      <p>
+        <kbd>Settings</kbd> › <strong>Language</strong>. Celestile ships in
+        English, Spanish, Russian, German, French, Portuguese, Hindi, Korean and
+        Japanese, and each is listed in its own script so you can find yours
+        without reading English first.
+      </p>
+    </div>
+  </details>
+
+  <details>
+    <summary>The text is too small</summary>
+    <div class="answer">
+      <p>
+        <kbd>Settings</kbd> › <strong>Text size</strong> has four steps up to
+        Very large, and it scales the whole interface rather than just the
+        menus.
+      </p>
+    </div>
+  </details>
+
+  <details>
+    <summary>The AI takes too long</summary>
+    <div class="answer">
+      <p>
+        Turns you cannot see already resolve instantly. To skip the ones you can
+        see as well, turn on <kbd>Settings</kbd> › <strong>Skip AI turns</strong>.
+      </p>
+    </div>
+  </details>
+
+  <h2>Ads</h2>
+
+  <details>
+    <summary>When do ads appear?</summary>
+    <div class="answer">
+      <p>
+        One full-screen ad, immediately before a new match, and only after your
+        first two matches of the day. There are no banners, and nothing in the
+        game is locked behind watching one.
+      </p>
+      <p>
+        <strong>In the EEA, the UK and Switzerland there are no ads at all.</strong>
+        Rather than ask for consent to personalised advertising, advertising is
+        switched off entirely in those regions.
+      </p>
+    </div>
+  </details>
+
+  <details>
+    <summary>How do I stop personalised ads?</summary>
+    <div class="answer">
+      <ul>
+        <li>iOS — <kbd>Settings</kbd> › Privacy &amp; Security › Tracking, and turn off Celestile.</li>
+        <li>Android — Google settings, where you can reset or delete your advertising ID.</li>
+      </ul>
+      <p>
+        You will still see ads, but they will be less relevant and no cross-app
+        tracking takes place. Buying a faction removes them entirely.
+      </p>
+    </div>
+  </details>
+
+  <h2>Privacy</h2>
+
+  <details>
+    <summary>Delete my data</summary>
+    <div class="answer">
+      <p>
+        There is no account and nothing of yours is stored on our systems, so
+        deleting the app from your device deletes everything it holds.
+      </p>
+      <p>
+        To have the purchase record held by our payments provider deleted as
+        well, email us and say which store you bought through and roughly when.
+      </p>
+      <p>
+        The full detail is in the
+        <a href="privacy.html">Privacy Policy</a>, which is available in all
+        nine languages the game ships in.
+      </p>
+    </div>
+  </details>
+
+  <h2>Bugs</h2>
+
+  <details>
+    <summary>Reporting a bug</summary>
+    <div class="answer">
+      <p>Useful things to include, roughly in order of how much they help:</p>
+      <ul>
+        <li>What you expected, and what happened instead.</li>
+        <li>A screenshot. For anything on the board this is worth several paragraphs.</li>
+        <li>Your device and OS version.</li>
+        <li>Which faction you were playing and roughly which round it was.</li>
+      </ul>
+      <p>
+        Combat in Celestile is deterministic, so if a fight ever resolved
+        differently from the forecast shown above it, that is a serious bug and
+        worth reporting even if it only happened once.
+      </p>
+    </div>
+  </details>
+
+</main>
+
+<footer class="foot">
+  <div class="shell foot__inner">
+    <p class="foot__note">&copy; 2026 Frosty Robot Studio LLC</p>
+    <ul class="foot__links" role="list">
+      <li><a href="../">Frosty Robot Studio</a></li>
+      <li><a href="./">Celestile</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="../site.js"></script>
+</body>
+</html>
