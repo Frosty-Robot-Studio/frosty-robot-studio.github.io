@@ -13,7 +13,12 @@
   var L = window.CELESTILE_LEGAL || {};
   var ORDER = ['en', 'es', 'ru', 'de', 'fr', 'pt', 'hi', 'ko', 'ja'];
   var STORE = 'celestile.legal.lang';
-  var EMAIL = 'frostyrobotstudio@anglernook.com';
+  // Single source for the contact address in both documents and all nine
+  // languages. Changed 2026-08-18 from frostyrobotstudio@anglernook.com; keep
+  // the old mailbox forwarding until the store listings are updated, because
+  // this address is what the published privacy policy names for rights and
+  // data-deletion requests.
+  var EMAIL = 'contact@frostyrobotstudio.com';
   // The studio's registered business address. Both documents name it as the
   // contact for data-deletion and rights requests, so it has to be the address
   // that actually reaches the company.

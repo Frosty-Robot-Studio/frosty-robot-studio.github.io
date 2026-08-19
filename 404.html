@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Page not found — Frosty Robot Studio</title>
+<meta name="description" content="That page does not exist. Links to Celestile, Timber Frenzy and support at Frosty Robot Studio.">
+<meta name="theme-color" content="#06080e">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/frs-mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/frs-mark-180.png">
+<link rel="stylesheet" href="/site.css">
+<style>
+/* ---------------------------------------------------------------------------
+   404. Served by GitHub Pages for any unmatched path, at any depth — so every
+   asset href here is absolute. A relative one resolves against the URL that
+   failed, which is exactly the URL known not to work.
+
+   No hero light and no field: the page a visitor lands on by accident should
+   read as a signpost, not as a second front door competing with the real one.
+   --------------------------------------------------------------------------- */
+
+.lost {
+  padding-block: clamp(64px, 12vh, 132px) clamp(48px, 8vh, 96px);
+  text-align: center;
+}
+
+/* The status code is in the heading, not on a line above it: a small label
+   stacked over a title is the eyebrow pattern (slop gate 4), and the code is
+   real information rather than decoration, so it belongs in the sentence. */
+.lost h1 {
+  font-weight: 500;
+  font-size: clamp(2rem, 5.5vw, 3rem);
+}
+
+.lost p {
+  margin: 18px auto 0;
+  max-width: 44ch;
+  color: var(--mid);
+}
+
+/* Not a nav bar repeated: three destinations on hairlines, which is the same
+   measuring device the product pages use for their specs. */
+.ways {
+  margin: clamp(36px, 5vw, 52px) auto 0;
+  max-width: 460px;
+  text-align: left;
+  border-top: 1px solid var(--hairline);
+}
+
+.way {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 4px 20px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* The row is the affordance, so the anchor has to be the row — an inline link
+   here measured 28px tall inside a 60px row, which is a 44px touch target that
+   only looks like one. The padding lives on the link and the row gives up the
+   same amount, so nothing moves and the whole height is tappable. */
+.way a {
+  display: block;
+  padding-block: 8px;
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.way span {
+  font-size: 0.9375rem;
+  color: var(--low);
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="shell nav__inner">
+    <a class="brand" href="/">
+      <img class="brand__mark" src="/assets/frs-mark.svg" alt="" width="26" height="26">
+      Frosty Robot Studio
+    </a>
+  </div>
+</header>
+
+<main id="main" class="shell lost" tabindex="-1">
+  <h1>404. That page isn&rsquo;t here.</h1>
+  <p>
+    Either it moved or the address has a typo in it. There are only three
+    places to go, so here they are.
+  </p>
+
+  <div class="ways">
+    <div class="way">
+      <a href="/celestile/">Celestile</a>
+      <span>Turn-based strategy</span>
+    </div>
+    <div class="way">
+      <a href="/timber-frenzy/">Timber Frenzy</a>
+      <span>Base defense</span>
+    </div>
+    <div class="way">
+      <a href="/celestile/support.html">Support</a>
+      <span>Or email us</span>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="shell foot__inner">
+    <p class="foot__note">&copy; 2026 Frosty Robot Studio LLC</p>
+    <ul class="foot__links" role="list">
+      <li><a href="/">Frosty Robot Studio</a></li>
+      <li><a href="mailto:contact@frostyrobotstudio.com">contact@frostyrobotstudio.com</a></li>
+      <li><a href="/celestile/privacy.html">Privacy</a></li>
+      <li><a href="/celestile/terms.html">Terms</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

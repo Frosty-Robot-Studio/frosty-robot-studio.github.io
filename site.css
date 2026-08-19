@@ -49,6 +49,13 @@
   --celestile: #45c46a;
   --timber: #e2a44a;
 
+  /* The ink each accent takes when it is a button ground. Tokens rather than
+     literals at the call site, so a change to an accent has one place to
+     follow it (slop gate 42). Both are near-black tinted toward their own
+     hue, not the same neutral. */
+  --celestile-ink: #04170b;
+  --timber-ink: #1d1102;
+
   --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
   --font-body: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
     Helvetica, Arial, sans-serif;
@@ -445,7 +452,12 @@ a {
 
 .btn--celestile {
   background-color: var(--celestile);
-  color: #04170b;
+  color: var(--celestile-ink);
+}
+
+.btn--timber {
+  background-color: var(--timber);
+  color: var(--timber-ink);
 }
 
 /* The Attack button ships disabled and is enabled by site.js, so a visitor
@@ -467,6 +479,10 @@ a {
 
   .btn--celestile:not(:disabled):hover {
     background-color: color-mix(in srgb, var(--celestile) 84%, #ffffff);
+  }
+
+  .btn--timber:not(:disabled):hover {
+    background-color: color-mix(in srgb, var(--timber) 84%, #ffffff);
   }
 
   .btn--ghost:not(:disabled):hover {
@@ -561,6 +577,10 @@ a {
 
   .btn--celestile:not(:disabled):active {
     background-color: color-mix(in srgb, var(--celestile) 74%, #000);
+  }
+
+  .btn--timber:not(:disabled):active {
+    background-color: color-mix(in srgb, var(--timber) 74%, #000);
   }
 
   .skip {

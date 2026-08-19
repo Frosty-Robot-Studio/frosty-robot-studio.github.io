@@ -97,10 +97,14 @@ li { margin-bottom: 8px; color: var(--mid); }
 a { color: var(--accent); }
 a:hover { color: var(--player); }
 
+/* A tint and a hairline all the way round, not a 3px coloured stripe down one
+   edge — that stripe is the stock "callout" tell (slop gate 17), and it also
+   leaves the box unbordered on three sides, which reads as a rendering fault
+   at small sizes. The tint still carries the emphasis. */
 .note {
   background: color-mix(in srgb, var(--player) 8%, var(--deep));
-  border-left: 3px solid var(--player);
-  border-radius: 0 6px 6px 0;
+  border: 1px solid color-mix(in srgb, var(--player) 34%, transparent);
+  border-radius: 6px;
   padding: 12px 16px; margin: 18px 0;
 }
 .note p { margin: 0; color: var(--hi); }

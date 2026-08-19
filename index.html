@@ -6,14 +6,14 @@
 <title>Frosty Robot Studio — turn-based strategy and base defense games for phones</title>
 <meta name="description" content="An independent studio building turn-based strategy and base defense games for phones and tablets. Makers of Celestile and Timber Frenzy.">
 <meta name="theme-color" content="#06080e">
-<link rel="canonical" href="https://frosty-robot-studio.github.io/">
+<link rel="canonical" href="https://frostyrobotstudio.com/">
 <link rel="icon" href="assets/frs-mark.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/frs-mark-180.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Frosty Robot Studio">
 <meta property="og:description" content="Turn-based strategy and base defense games for phones and tablets. Makers of Celestile.">
-<meta property="og:url" content="https://frosty-robot-studio.github.io/">
-<meta property="og:image" content="https://frosty-robot-studio.github.io/assets/og-studio.png">
+<meta property="og:url" content="https://frostyrobotstudio.com/">
+<meta property="og:image" content="https://frostyrobotstudio.com/assets/og-studio.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -50,19 +50,11 @@
   margin-bottom: 22px;
 }
 
-.hero__sub {
-  margin: 0 auto;
-  max-width: 46ch;
-  font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
-  color: var(--mid);
-  text-wrap: balance;
-}
-
 /* --- the two kinds ------------------------------------------------------
    The headline's claim, made structural: the real taxonomy of what the studio
    makes, and which product is which. It is a table, not a second navigation
-   bar — the products have exactly one link each, in the header above and in
-   their own sections below. */
+   bar — each product has exactly one link in the header and one in its own
+   section below, so this is the only place naming both without linking. */
 
 .kinds {
   display: grid;
@@ -187,8 +179,10 @@
   font-size: 1rem;
 }
 
+/* Each product section sets --product-accent to its own colour; green is the
+   default because Celestile is the section that comes first. */
 .spec__row dd b {
-  color: var(--celestile);
+  color: var(--product-accent, var(--celestile));
   font-weight: 600;
 }
 
@@ -203,48 +197,28 @@
   margin-top: 36px;
 }
 
-/* Timber Frenzy: one verified fact exists about it, so it gets one hairline
-   row rather than a box sized for content that is not there. The rule is
-   tinted with the product's own accent — the only place that colour appears. */
-.also {
-  display: grid;
-  gap: 10px clamp(40px, 6vw, 88px);
-  margin-top: clamp(64px, 8vw, 104px);
-  padding-top: 30px;
-  border-top: 1px solid color-mix(in srgb, var(--timber) 36%, transparent);
-}
+/* Timber Frenzy is a peer of Celestile now that it has a page, so it reuses
+   the same grid with the shot on the other side. Only the accent differs:
+   `--celestile` green above, `--timber` amber here, applied by re-pointing the
+   one token the section's emphasis reads from rather than by writing a second
+   set of rules. */
 
-@media (min-width: 900px) {
-  .also {
-    grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+@media (min-width: 920px) {
+  .product__grid--flip {
+    grid-template-columns: 296px minmax(0, 1fr);
   }
 }
 
-.also h2 {
-  font-size: clamp(1.375rem, 2.4vw, 1.75rem);
+/* Below the breakpoint the grid is one column and source order wins, which
+   would put the screenshot above the heading it belongs to. */
+@media (max-width: 919px) {
+  .product__grid--flip .product__shot {
+    order: 2;
+  }
 }
 
-.also p + p {
-  margin-top: 8px;
-}
-
-.also__note {
-  font-size: 0.9375rem;
-  color: var(--low);
-}
-
-/* --- studio note --------------------------------------------------------
-   Uses the shared .split layout; only the type size and the emphasis colour
-   are local. */
-
-.note__body p {
-  font-size: clamp(1rem, 1.4vw, 1.125rem);
-  max-width: 62ch;
-}
-
-.note__body strong {
-  color: var(--hi);
-  font-weight: 600;
+.product--timber {
+  --product-accent: var(--timber);
 }
 
 /* --- the mark's motion ---------------------------------------------------
@@ -264,10 +238,21 @@
   from { opacity: 0; }
 }
 
+/* A double blink rather than one flicker: a single dip at this speed reads as
+   a dropped frame, two reads as an eye. Both dips sit in the last ~12% of the
+   cycle so the visor is simply lit the rest of the time. */
 @keyframes visorBlink {
-  0%, 95.8%, 100% { opacity: 1; }
-  97.2% { opacity: 0.06; }
-  98.6% { opacity: 1; }
+  0%, 88%, 100% { opacity: 1; }
+  90% { opacity: 0.06; }
+  92.5% { opacity: 1; }
+  95% { opacity: 0.06; }
+  97.5% { opacity: 1; }
+}
+
+/* The robot breathes. Transform only, so it composites, and the travel is
+   small enough to read as idle rather than as a bounce. */
+@keyframes markBob {
+  50% { transform: translateY(-6px); }
 }
 
 .m-tile {
@@ -307,17 +292,29 @@
   animation: markFade 260ms ease 800ms both;
 }
 
-/* Rare enough to be personality rather than a tic: once every nine seconds. */
 .m-visor__lit {
-  animation: visorBlink 9s linear 2.4s infinite;
+  animation: visorBlink 4s linear 2.4s infinite;
   filter: drop-shadow(0 0 2.5px #7fd8e8cc);
+}
+
+/* Starts after the 1.14s assembly sequence has finished, so the mark lands
+   before it begins to idle. Ambient brand motion, not a UI transition — the
+   300ms ceiling in animation-standards.md governs feedback, and a 4.4s idle
+   loop deliberately sits outside it. */
+.hero-mark {
+  animation: markBob 4.4s ease-in-out 1.14s infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
   /* Every part lands in its finished state at once and the mark as a whole
      fades up. The !important is required to survive the global duration
      override in site.css, which would otherwise collapse this fade to 0.01ms
-     and leave a hard pop. */
+     and leave a hard pop.
+
+     The second rule also does the work of switching off the idle bob: it
+     replaces that animation on the same element rather than layering a
+     cancellation on top of it. Anything added to .hero-mark later is switched
+     off here for free — which is the reason to keep the shorthand. */
   .hero-mark * {
     animation: none !important;
   }
@@ -339,12 +336,13 @@
       <img class="brand__mark" src="assets/frs-mark.svg" alt="" width="26" height="26">
       Frosty Robot Studio
     </a>
-    <!-- One link, one destination. Timber Frenzy is named in the first
-         viewport by the two-kinds table; a second nav item pointing at an
-         anchor while this one points at a page would be two different kinds of
-         "Celestile" in one bar. -->
+    <!-- Two links, both to real pages. This was one link until Timber Frenzy
+         got a page of its own (2026-08-18); the earlier note here argued
+         against pointing one item at a page and the other at an anchor, which
+         is still right — that is why the second item is a page, not #timber. -->
     <nav class="nav__links" aria-label="Products">
       <a class="nav__link" href="celestile/">Celestile</a>
+      <a class="nav__link" href="timber-frenzy/">Timber Frenzy</a>
     </nav>
   </div>
 </header>
@@ -380,23 +378,22 @@
         </g>
       </svg>
 
-      <h1>You always know what&rsquo;s coming.</h1>
-      <p class="hero__sub">
-        Frosty Robot Studio makes turn-based strategy and base defense games for
-        phones and tablets. Both of them tell you what is about to happen, then
-        leave the decision to you.
-      </p>
+      <!-- The headline carries the platform claim itself, so there is no
+           paragraph under it: the table below already names both games and what
+           kind each one is, and a sentence between them would only say it
+           first, in worse words. -->
+      <h1>We make games for phones.</h1>
 
       <div class="kinds">
         <div>
           <span class="kind__name">Celestile</span>
           <span class="kind__kind label">Turn-based strategy</span>
-          <p class="kind__what">You get the whole board and all the time you want. Every fight tells you its result before you commit to it.</p>
+          <p class="kind__what">The whole board, all the time you want, and every fight&rsquo;s result before you commit to it.</p>
         </div>
         <div>
           <span class="kind__name">Timber Frenzy</span>
           <span class="kind__kind label">Base defense</span>
-          <p class="kind__what">You see the wave before it reaches you, and exactly how long you have to be ready for it.</p>
+          <p class="kind__what">You see the wave coming, and exactly how long you have to be ready for it.</p>
         </div>
       </div>
 
@@ -417,10 +414,8 @@
 
         <p class="product__lede">
           A turn-based 4X strategy game. Claim a cluster of space one tile at a
-          time &mdash; expand, build, research and out-think up to fourteen rival
-          empires across an isometric board of space, asteroids, moons, planets
-          and suns &mdash; then win by holding every planet, or by finishing
-          ahead of all of them inside forty rounds.
+          time, out-think up to fourteen rival empires, and win by holding every
+          planet or by finishing ahead of all of them.
         </p>
 
         <dl class="spec">
@@ -430,11 +425,11 @@
           </div>
           <div class="spec__row">
             <dt class="label">Two ways to win</dt>
-            <dd>Domination &mdash; hold every planet. Ascendancy &mdash; finish ahead inside 40 rounds.</dd>
+            <dd>Domination &mdash; hold every planet. Ascendancy &mdash; finish ahead inside 30 rounds.</dd>
           </div>
           <div class="spec__row">
             <dt class="label">Choices</dt>
-            <dd>8 factions, each with one real strength and one real cost. 8 unit classes. 15 technologies.</dd>
+            <dd>8 factions, each a different plan. 8 unit classes. 20 technologies.</dd>
           </div>
           <div class="spec__row">
             <dt class="label">Plays</dt>
@@ -442,7 +437,7 @@
           </div>
           <div class="spec__row">
             <dt class="label">Ships in</dt>
-            <dd>Nine languages, with 63 achievements and a career record that persists.</dd>
+            <dd>Nine languages, with 47 achievements and a career record that persists.</dd>
           </div>
         </dl>
 
@@ -464,37 +459,50 @@
     </div>
   </section>
 
-  <!-- ===== Timber Frenzy ===== -->
-  <section id="timber-frenzy" aria-labelledby="timber-h">
-    <div class="shell">
-      <div class="also">
-        <h2 id="timber-h">Timber Frenzy</h2>
-        <div>
-          <p>A base defense game.</p>
-          <p class="also__note">More to show when there is more to show.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- ===== Timber Frenzy =====
+       Mirrors the Celestile section above rather than inventing a second
+       layout: the two products are peers now that both have a page, and the
+       shot sits on the opposite side so the pair reads as a spread. -->
+  <section id="timber-frenzy" class="band product--timber" aria-labelledby="timber-h">
+    <div class="shell product__grid product__grid--flip">
+      <figure class="product__shot">
+        <img class="frame" src="timber-frenzy/shots/camp.webp"
+             alt="The Timber Frenzy home camp at night: a lit campfire, a wolf companion, a treasure chest, and a stage selector reading Stage 24."
+             width="560" height="1217" loading="lazy" decoding="async">
+        <figcaption>Camp, between stages.</figcaption>
+      </figure>
 
-  <!-- ===== studio note ===== -->
-  <section class="band" aria-labelledby="studio-h">
-    <div class="shell split">
-      <h2 id="studio-h">One small studio</h2>
-      <div class="split__body note__body">
-        <p>
-          Frosty Robot Studio is independent. We build for phones first &mdash;
-          Celestile is portrait, one-handed, and plays with no connection at
-          all &mdash; and we finish games rather than operate them. Version 1.0
-          is the whole game: nothing time-gated, nothing to subscribe to.
+      <div>
+        <div class="product__head">
+          <img class="product__icon" src="assets/timber-icon-320.webp"
+               alt="Timber Frenzy app icon"
+               width="92" height="92" loading="lazy" decoding="async">
+          <h2 id="timber-h">Timber Frenzy</h2>
+        </div>
+
+        <p class="product__lede">
+          A base defense game. Pick a stage from camp, then hold a forest
+          clearing through seven waves with your hero, your turret and the
+          animal fighting beside you &mdash; and spend what you carry back.
         </p>
-        <p>
-          The two things we make have the same idea underneath. A turn-based
-          game shows you a forecast; a defense game shows you the next wave and
-          the time left before it. Both are promises, and a game is only as good
-          as how exactly it keeps them.
-          <strong>Celestile keeps its one literally: the number above a fight is
-          the number you get, every time.</strong>
+
+        <dl class="spec">
+          <div class="spec__row">
+            <dt class="label">Runs</dt>
+            <dd><b>100 stages</b>, across ten Ages from a canvas camp to a space base.</dd>
+          </div>
+          <div class="spec__row">
+            <dt class="label">Plays</dt>
+            <dd>Offline, with an anonymous cloud save. No account.</dd>
+          </div>
+          <div class="spec__row">
+            <dt class="label">Out now</dt>
+            <dd>Free on iOS. Google Play to follow.</dd>
+          </div>
+        </dl>
+
+        <p class="product__actions">
+          <a class="btn btn--timber" href="timber-frenzy/">See Timber Frenzy</a>
         </p>
       </div>
     </div>
@@ -502,14 +510,13 @@
 
 </main>
 
-<!-- TODO: add a contact route (studio email or an issues link) once one exists.
-     Deliberately left out rather than invented. -->
 <footer class="foot">
   <div class="shell foot__inner">
     <p class="foot__note">&copy; 2026 Frosty Robot Studio LLC</p>
     <ul class="foot__links" role="list">
       <li><a href="celestile/">Celestile</a></li>
-      <li><a href="celestile/support.html">Support</a></li>
+      <li><a href="timber-frenzy/">Timber Frenzy</a></li>
+      <li><a href="mailto:contact@frostyrobotstudio.com">contact@frostyrobotstudio.com</a></li>
       <li><a href="celestile/privacy.html">Privacy</a></li>
       <li><a href="celestile/terms.html">Terms</a></li>
     </ul>

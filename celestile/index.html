@@ -6,14 +6,14 @@
 <title>Celestile — turn-based 4X strategy with no dice</title>
 <meta name="description" content="A turn-based 4X strategy game for phones and tablets. Deterministic combat: the forecast above a fight is exactly what happens. Single-player, offline, no account.">
 <meta name="theme-color" content="#07080f">
-<link rel="canonical" href="https://frosty-robot-studio.github.io/celestile/">
+<link rel="canonical" href="https://frostyrobotstudio.com/celestile/">
 <link rel="icon" href="../assets/frs-mark.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/celestile-icon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Celestile — turn-based 4X strategy with no dice">
 <meta property="og:description" content="Expand across a cluster of space, out-think fourteen rival empires, and never lose a fight to a dice roll. Offline. No account.">
-<meta property="og:url" content="https://frosty-robot-studio.github.io/celestile/">
-<meta property="og:image" content="https://frosty-robot-studio.github.io/assets/og-celestile.png">
+<meta property="og:url" content="https://frostyrobotstudio.com/celestile/">
+<meta property="og:image" content="https://frostyrobotstudio.com/assets/og-celestile.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -41,6 +41,14 @@
      behalf. The green is --celestile from site.css and is not redeclared. */
   --accent: #4ad6c4;
   --foe: #e2564d;
+
+  /* The three grounds the forecast rings sit on: unresolved, settled in your
+     favour, settled in theirs. Named rather than written as literals at the
+     call site (slop gate 42), so the pair of resolved states stays visibly
+     derived from --celestile and --foe rather than drifting off them. */
+  --ring-ground: #0b0e14;
+  --ring-ground-win: #0d1b13;
+  --ring-ground-foe: #1c0f0e;
 }
 
 /* Deep space, drawn the way the game draws it: a few faint stars over the void,
@@ -333,7 +341,7 @@
   margin: 0 auto;
   border: 3px solid var(--low);
   border-radius: 50%;
-  background: #0b0e14;
+  background: var(--ring-ground);
   font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 600;
@@ -344,12 +352,12 @@
 
 .is-resolved .pod__ring {
   border-color: var(--celestile);
-  background: #0d1b13;
+  background: var(--ring-ground-win);
 }
 
 .is-resolved .pod--foe .pod__ring {
   border-color: var(--foe);
-  background: #1c0f0e;
+  background: var(--ring-ground-foe);
 }
 
 .pod__who {
@@ -505,79 +513,6 @@
   color: var(--mid);
 }
 
-/* --- what you get -------------------------------------------------------- */
-
-.terms-grid {
-  display: grid;
-  gap: 28px clamp(32px, 5vw, 72px);
-  margin-top: 40px;
-}
-
-@media (min-width: 760px) {
-  .terms-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.tlist {
-  margin: 14px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.tlist li {
-  position: relative;
-  padding: 9px 0 9px 26px;
-  border-bottom: 1px solid var(--hairline);
-  color: var(--mid);
-  font-size: 1rem;
-}
-
-/* A small iso diamond instead of a bullet — the same mark the legal pages use
-   for their section heads, so the whole site marks a list the same way. */
-.tlist li::before {
-  content: '';
-  position: absolute;
-  left: 2px;
-  top: 18px;
-  width: 9px;
-  height: 9px;
-  background: var(--celestile);
-  opacity: 0.75;
-  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
-}
-
-.tlist--not li::before {
-  background: var(--low);
-}
-
-.tlist b {
-  color: var(--hi);
-  font-weight: 600;
-}
-
-.ads {
-  margin-top: 36px;
-  padding: 22px 24px;
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-panel);
-  background: var(--bg-raised);
-}
-
-.ads p {
-  color: var(--mid);
-  font-size: 1rem;
-}
-
-.ads p + p {
-  margin-top: 10px;
-}
-
-.ads b {
-  color: var(--hi);
-  font-weight: 600;
-}
-
 /* --- forced colours ------------------------------------------------------
    Windows High Contrast repaints every colour but leaves background-image
    alone, so shapes drawn with a background vanish while decorative gradients
@@ -586,13 +521,6 @@
 @media (forced-colors: active) {
   .stars {
     display: none;
-  }
-
-  /* The list markers are clip-path diamonds filled with a background colour,
-     which forced-colors flattens to the canvas. */
-  .tlist li::before {
-    forced-color-adjust: none;
-    background: CanvasText;
   }
 
   .store[aria-disabled='true'] {
@@ -632,8 +560,12 @@
       <img class="brand__mark" src="../assets/frs-mark.svg" alt="" width="26" height="26">
       Frosty Robot Studio
     </a>
-    <nav class="nav__links" aria-label="Celestile">
-      <a class="nav__link" href="support.html">Support</a>
+    <!-- Sibling product, then the action for this one. The Timber Frenzy page
+         mirrors it exactly, so the two product pages navigate the same way and
+         either game is one click from the other. Support stays in the footer,
+         where it is on every page rather than only on this one. -->
+    <nav class="nav__links" aria-label="Products">
+      <a class="nav__link" href="../timber-frenzy/">Timber Frenzy</a>
       <a class="nav__link" href="#get">Get it</a>
     </nav>
   </div>
@@ -691,7 +623,7 @@
              alt="A Celestile match at round 12: an isometric board of planets, moons and asteroids with a green zone of control drawn around a claimed world."
              width="720" height="1561" fetchpriority="high" decoding="async">
         <img class="fan__side frame" src="shots/04-tech.webp"
-             alt="Celestile's technology web: fifteen technologies across five disciplines, all on one screen."
+             alt="Celestile's technology web: twenty technologies across five disciplines, all on one screen."
              width="560" height="1214" decoding="async">
       </div>
     </div>
@@ -700,16 +632,13 @@
   <!-- ===== the game ===== -->
   <section class="band" aria-labelledby="game-h">
     <div class="shell split">
-      <h2 id="game-h">A whole 4X on a phone</h2>
+      <h2 id="game-h">Expand, build, out-think</h2>
       <div class="split__body">
         <p>
-          Celestile is a turn-based 4X strategy game for phones and tablets. You
-          claim a cluster of space one tile at a time &mdash; expanding across
-          space, asteroids, moons, planets and suns, building inside the
-          territory you hold, researching, and out-thinking up to fourteen rival
-          empires. The board scales with the field: a tight 12&times;12 grid
-          against a single opponent, up to 24&times;24 against fourteen, across
-          four difficulty levels.
+          Claim a cluster of space one tile at a time, build inside the territory
+          you hold, and out-think up to fourteen rival empires. The board scales
+          with the field &mdash; 12&times;12 against one opponent, 24&times;24
+          against fourteen, across four difficulty levels.
         </p>
 
         <div class="wins">
@@ -719,7 +648,7 @@
           </div>
           <div class="win">
             <h3>Ascendancy</h3>
-            <p>Finish ahead of every rival inside 40 rounds.</p>
+            <p>Finish ahead of every rival inside 30 rounds.</p>
           </div>
         </div>
       </div>
@@ -731,10 +660,9 @@
     <div class="shell stage">
       <h2 id="combat-h">No dice</h2>
       <p>
-        The forecast above a fight is the outcome. Attack, defence, terrain and
-        technology resolve to one number, and you see that number before you
-        commit. A fight you lose is a fight you misread &mdash; not one a random
-        roll took from you. It is the whole reason the game exists.
+        Attack, defence, terrain and technology resolve to one number, and you
+        see it before you commit. A fight you lose is a fight you misread, not
+        one a random roll took from you.
       </p>
 
       <div class="forecast" id="forecast">
@@ -775,41 +703,39 @@
             <h3>Territory you have to earn</h3>
             <p>
               Every planet projects a zone of control, and you can only build
-              inside your own. Put three Moon Lasers in a planet&rsquo;s zone and
-              that zone widens. Growth is a build order, not a land grab.
+              inside your own. Three Moon Lasers in a planet&rsquo;s zone widen
+              it. Growth is a build order, not a land grab.
             </p>
           </div>
           <div class="feat">
             <h3>A tech web that fits on one screen</h3>
             <p>
               Five disciplines &mdash; Warfare, Doctrine, Aeronautics, Stellar
-              and Lunar &mdash; three tiers each. Fifteen technologies on a
-              radial web you read at a glance instead of scrolling.
+              and Lunar &mdash; three tiers each, branching in two at the top.
+              Twenty technologies on one radial web.
             </p>
           </div>
           <div class="feat">
             <h3>Fog that hides fleets, not geography</h3>
             <p>
-              You see your own zones plus a tile, and a tile around every unit.
-              Ground you have already explored stays on the map, dimmed. An
-              enemy fleet standing on it does not.
+              Ground you have explored stays on the map, dimmed. An enemy fleet
+              standing on it does not.
             </p>
           </div>
           <div class="feat">
             <h3>An economy you can leverage</h3>
             <p>
-              Deposit energy in the bank and draw interest, or borrow against the
-              future and settle a balloon payment five rounds later. Miss it and
-              the Galactic Bank sends dreadnoughts to collect.
+              Bank energy for interest, or borrow against the future and settle a
+              balloon payment five rounds later. Miss it and the Galactic Bank
+              sends dreadnoughts to collect.
             </p>
           </div>
           <div class="feat">
             <h3>Eight unit classes, and a reason to specialise</h3>
             <p>
               Scout, Marine, Rover, Fighter, Bomber, Mech, Artillery,
-              Dreadnought. Build a military university for a class and every unit
-              of that class attacks 10% harder for the rest of the game, anywhere
-              on the map.
+              Dreadnought. Build a military university for one class and every
+              unit of it attacks 10% harder, anywhere, for the rest of the game.
             </p>
           </div>
         </div>
@@ -823,51 +749,49 @@
       <h2 id="factions-h">Eight factions</h2>
       <div class="split__body">
         <p>
-          Each has one real strength and one real cost. Nothing here is a
-          straight upgrade, so choosing is an actual decision rather than picking
-          a skin. Two ship with the game; the other six are a one-time $1.99
-          each, with no subscription.
+          Each one is a different plan, not a bigger number. Two ship with the
+          game; the other six are a one-time $1.99 each, with no subscription.
         </p>
 
         <div class="factions">
           <div class="faction">
             <span class="faction__name">Hive Mind</span>
-            <span class="faction__what">Mines cost 1 and yield 50% more energy.</span>
+            <span class="faction__what">A unit that spends no movement heals to full, instead of a quarter.</span>
             <span class="faction__free">Free</span>
           </div>
           <div class="faction">
             <span class="faction__name">Swarm</span>
-            <span class="faction__what">Each planet supplies 1 extra unit and units cost 15&ndash;25% less &mdash; but defend 10% weaker.</span>
+            <span class="faction__what">Planets hold 1 more unit and units cost 15&ndash;25% less &mdash; but defend 10% weaker.</span>
             <span class="faction__free">Free</span>
           </div>
           <div class="faction">
             <span class="faction__name">Collective</span>
-            <span class="faction__what">All improvements yield 30% more energy.</span>
+            <span class="faction__what">Units defend 45% stronger while standing next to a friendly unit.</span>
             <span></span>
           </div>
           <div class="faction">
             <span class="faction__name">Ascendant</span>
-            <span class="faction__what">Research costs half as much.</span>
+            <span class="faction__what">Starts with Solar Tap already researched, and research costs half as much.</span>
             <span></span>
           </div>
           <div class="faction">
             <span class="faction__name">Warbound</span>
-            <span class="faction__what">Units attack 10% stronger, but income is 12% lower.</span>
+            <span class="faction__what">Units attack 10% stronger and take 35% less counterattack damage &mdash; but income is 12% lower.</span>
             <span></span>
           </div>
           <div class="faction">
             <span class="faction__name">Nomad</span>
-            <span class="faction__what">Scouts move 1 further, and the empire survives without planets.</span>
+            <span class="faction__what">Scouts move 1 further and income is 10% lower. Survives one round with no world &mdash; retake one or the fleet is lost.</span>
             <span></span>
           </div>
           <div class="faction">
             <span class="faction__name">Forge</span>
-            <span class="faction__what">Improvements cost 25% less.</span>
+            <span class="faction__what">Moon work costs 60% less.</span>
             <span></span>
           </div>
           <div class="faction">
             <span class="faction__name">Wardens</span>
-            <span class="faction__what">Planets project 1 further, and units defend 20% stronger.</span>
+            <span class="faction__what">Your zone of control reaches 1 tile further, and units defend 32% stronger.</span>
             <span></span>
           </div>
         </div>
@@ -893,8 +817,8 @@
         </figure>
         <figure class="shot">
           <img class="frame" src="shots/04-tech.webp" width="560" height="1214" loading="lazy" decoding="async"
-               alt="The radial technology web, all fifteen technologies visible at once.">
-          <figcaption>15 technologies. One screen.</figcaption>
+               alt="The radial technology web, all twenty technologies visible at once.">
+          <figcaption>20 technologies. One screen.</figcaption>
         </figure>
         <figure class="shot">
           <img class="frame" src="shots/07-production.webp" width="560" height="1214" loading="lazy" decoding="async"
@@ -904,54 +828,22 @@
         <figure class="shot">
           <img class="frame" src="shots/02-factions.webp" width="560" height="1214" loading="lazy" decoding="async"
                alt="The eight-faction roster, two unlocked and six locked.">
-          <figcaption>Eight factions. Each one costs you something.</figcaption>
+          <figcaption>Eight factions. Eight different plans.</figcaption>
         </figure>
         <figure class="shot">
           <img class="frame" src="shots/08-achievements.webp" width="560" height="1214" loading="lazy" decoding="async"
                alt="The achievements screen, partly earned.">
-          <figcaption>63 achievements. Records that persist.</figcaption>
+          <figcaption>47 achievements. Records that persist.</figcaption>
         </figure>
       </div>
     </div>
   </section>
 
-  <!-- ===== what you get ===== -->
-  <section class="band" aria-labelledby="does-h">
-    <div class="shell">
-      <h2 id="does-h">What you get</h2>
-
-      <div class="terms-grid">
-        <div>
-          <h3>In the box</h3>
-          <ul class="tlist" role="list">
-            <li><b>Two factions free</b> &mdash; Hive Mind and Swarm, plus the whole game around them.</li>
-            <li>Every map size, every unit, every technology, both win conditions.</li>
-            <li><b>63 achievements</b>, a five-star rating for every faction, and a career record that persists between games.</li>
-            <li>Nine languages: English, Spanish, Russian, German, French, Portuguese, Hindi, Korean, Japanese.</li>
-            <li>Six further factions at a one-time <b>$1.99</b> each. No subscription.</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Not in the box</h3>
-          <ul class="tlist tlist--not" role="list">
-            <li>No account and no login.</li>
-            <li>No internet connection &mdash; it plays entirely offline.</li>
-            <li>No chat, and no other players.</li>
-            <li>No energy timers and nothing time-gated.</li>
-            <li>No dice, anywhere in combat.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="ads">
-        <p><b>About the one ad.</b> There is a single interstitial, and only from
-        your third match of the day &mdash; your first two each day are never
-        interrupted.</p>
-        <p>Buy any faction and it never appears again. Players in the EEA, the UK
-        and Switzerland never see it at all.</p>
-      </div>
-    </div>
-  </section>
+  <!-- The "What you get" section was removed on 2026-08-18. Its ad disclosure
+       was checked first, not assumed disposable: support.html already states the
+       interstitial policy in full under "Ads" — one ad, only after the day's
+       first two matches, none at all in the EEA, UK and Switzerland. That page
+       is now the single source for it. Do not remove it from there. -->
 
   <!-- ===== get it ===== -->
   <section class="band" id="get" aria-labelledby="get-h">

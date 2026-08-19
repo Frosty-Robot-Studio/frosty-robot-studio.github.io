@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Timber Frenzy — base defense across ten Ages</title>
+<meta name="description" content="A base defense game for phones. Hold a forest clearing through seven waves a stage, across 100 stages and ten Ages. Free on iOS. Plays offline, no account.">
+<meta name="theme-color" content="#0b0a07">
+<link rel="canonical" href="https://frostyrobotstudio.com/timber-frenzy/">
+<link rel="icon" href="../assets/frs-mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/timber-icon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Timber Frenzy — base defense across ten Ages">
+<meta property="og:description" content="Hold a forest clearing through seven waves a stage, across 100 stages and ten Ages. Free on iOS. Offline, no account.">
+<meta property="og:url" content="https://frostyrobotstudio.com/timber-frenzy/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../site.css">
+<style>
+/* ---------------------------------------------------------------------------
+   Timber Frenzy.
+
+   Macrostructure: process-timeline. Tone: firelit. Differs from the Celestile
+   page on skeleton (an ordinal spine rather than a manifest with an embedded
+   demo), accent temperature (amber rather than green), and density.
+
+   The spine is the reason for the pick, not decoration: the game's ten Ages are
+   genuinely ordinal and named in the source (AGE_NAMES), so 01–10 carries
+   information the reader needs. This is the one macrostructure where numbering
+   is earned; everywhere else on this site it would be slop gate 6.
+
+   Palette is re-pointed at the game's own warm ground. Nav, buttons, focus
+   rings, the frame treatment and the editorial split all follow from site.css
+   without an override.
+   --------------------------------------------------------------------------- */
+
+:root {
+  --bg: #0b0a07;
+  --bg-raised: #151209;
+  --surface: #1f1a10;
+  --hi: #f7f3ea;
+  --mid: #c5bba8;
+  --low: #9a9081;
+
+  /* Amber is the product's colour and the interface accent here, the way teal
+     is on the Celestile page. --timber is inherited from site.css, not
+     redeclared, so the two pages cannot drift apart. */
+  --accent: var(--timber);
+}
+
+/* Embers over the dark, the way the game's camp screen sits under a night sky.
+   Fixed, so it does not scroll like wallpaper. Four points, not a texture. */
+.embers {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 22%, #e2a44a80, transparent),
+    radial-gradient(1px 1px at 68% 12%, #e2a44a60, transparent),
+    radial-gradient(1px 1px at 38% 64%, #e2a44a55, transparent),
+    radial-gradient(1.5px 1.5px at 88% 74%, #e2a44a4d, transparent);
+}
+
+/* --- hero ---------------------------------------------------------------- */
+
+.hero {
+  --hero-light: #e2a44a1f;
+}
+
+.hero__icon {
+  width: 116px;
+  height: 116px;
+  margin: 0 auto 26px;
+  border-radius: var(--radius-icon);
+  border: 1px solid var(--hairline);
+}
+
+.hero h1 {
+  font-weight: 500;
+  font-size: clamp(3rem, 9vw, 5.5rem);
+}
+
+.hero__tag {
+  margin: 22px auto 0;
+  max-width: 34ch;
+  font-size: clamp(1.0625rem, 1.7vw, 1.3125rem);
+  color: var(--mid);
+  text-wrap: balance;
+}
+
+/* --- store buttons -------------------------------------------------------
+   Same construction as the Celestile page: authored marks rather than Apple's
+   and Google's badge artwork, because the official badges are trademarked
+   assets served from their own hosts and this site makes no external requests.
+
+   Unlike that page, the App Store button here is real — the game is live — so
+   only the Play button carries the pending treatment. */
+
+.stores {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.store {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 60px;
+  padding: 10px 22px 10px 18px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-control);
+  background: var(--surface);
+  color: var(--hi);
+  text-decoration: none;
+  text-align: left;
+  transition: transform 160ms var(--ease-out), border-color 160ms ease;
+}
+
+.store[aria-disabled='true'] {
+  cursor: default;
+  background: transparent;
+  border-style: dashed;
+}
+
+.store[aria-disabled='true'] .store__icon {
+  color: var(--low);
+}
+
+.store[aria-disabled='true'] .store__big {
+  color: var(--mid);
+}
+
+.store:not([aria-disabled='true']):active {
+  transform: scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .store:not([aria-disabled='true']):active {
+    transform: none;
+    border-color: var(--timber);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .store:not([aria-disabled='true']):hover {
+    border-color: color-mix(in srgb, var(--timber) 60%, transparent);
+  }
+}
+
+.store__icon {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  color: var(--timber);
+}
+
+.store__lines {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.store__small {
+  font-size: 0.75rem;
+  color: var(--low);
+}
+
+.store__big {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.stores__note {
+  margin: 16px auto 0;
+  max-width: 42ch;
+  font-size: 0.875rem;
+  color: var(--low);
+}
+
+/* Two badges of different widths stacking at different x positions is ragged
+   in the most looked-at spot on the page. Below 520px they match. */
+@media (max-width: 520px) {
+  .stores {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .store {
+    justify-content: flex-start;
+  }
+}
+
+.hero__shot {
+  margin: clamp(48px, 7vw, 88px) auto 0;
+  width: min(300px, 76vw);
+}
+
+/* --- the loop ------------------------------------------------------------
+   Three steps on a rule. Ordinal, because the loop only makes sense in order —
+   the same justification the Ages spine below runs on. */
+
+.loop {
+  counter-reset: loop;
+  border-top: 1px solid var(--hairline);
+  margin-top: 40px;
+}
+
+.loop__step {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 4px 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.loop__step::before {
+  counter-increment: loop;
+  content: counter(loop, decimal-leading-zero);
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--timber);
+  padding-top: 0.25rem;
+}
+
+.loop__step h3 {
+  margin: 0;
+}
+
+.loop__step p {
+  grid-column: 2;
+  color: var(--mid);
+}
+
+/* --- the Ages spine ------------------------------------------------------
+   The page's authored moment and the argument for the product: ten upgrades
+   named in order, drawn as one climb rather than ten cards. The rule is a real
+   border on the list, and each Age hangs a marker on it — so with backgrounds
+   repainted by forced-colors the spine survives as a border and the markers as
+   text, instead of the whole thing disappearing.
+
+   Deliberately not a grid of ten boxes: ten same-size cards would say the Ages
+   are interchangeable, which is the opposite of what a progression is. */
+
+.ages {
+  margin: 40px 0 0;
+  padding: 0 0 0 clamp(26px, 4vw, 38px);
+  list-style: none;
+  border-left: 1px solid color-mix(in srgb, var(--timber) 30%, transparent);
+}
+
+.age {
+  position: relative;
+  padding: 0 0 clamp(20px, 2.6vw, 28px);
+}
+
+.age:last-child {
+  padding-bottom: 0;
+}
+
+/* The marker sits on the rule, its size and warmth rising with the Age, so the
+   climb is legible before a single word is read. --step is set per item. */
+.age::before {
+  content: '';
+  position: absolute;
+  top: 0.62em;
+  left: calc(-1 * clamp(26px, 4vw, 38px) - 1px);
+  width: calc(5px + var(--step) * 0.55px);
+  height: calc(5px + var(--step) * 0.55px);
+  transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  background: color-mix(in srgb, var(--timber) calc(34% + var(--step) * 7%), var(--low));
+}
+
+.age__n {
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--low);
+  font-variant-numeric: tabular-nums;
+}
+
+.age__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.0625rem, 1.8vw, 1.25rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--hi);
+  margin-left: 12px;
+}
+
+.ages__note {
+  margin-top: 30px;
+  font-size: 0.9375rem;
+  color: var(--low);
+}
+
+/* --- what is in a stage --------------------------------------------------
+   Hairline rows with a fixed key column, the same measuring device the studio
+   page uses for Celestile's spec. One visual language across the site. */
+
+.spec {
+  margin: 40px 0 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.spec__row {
+  display: grid;
+  grid-template-columns: 168px 1fr;
+  gap: 4px 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.spec__row dt {
+  margin: 0;
+}
+
+.spec__row dd {
+  margin: 0;
+  color: var(--hi);
+  font-size: 1rem;
+}
+
+.spec__row dd b {
+  color: var(--timber);
+  font-weight: 600;
+}
+
+@media (max-width: 560px) {
+  .spec__row {
+    grid-template-columns: 1fr;
+    padding: 14px 0;
+  }
+}
+
+/* --- screenshot rail -----------------------------------------------------
+   Scrolls inside itself; the page never scrolls sideways. The clipped card at
+   the right edge is the affordance and does not need a sentence explaining it. */
+
+.rail {
+  display: flex;
+  gap: 18px;
+  margin-top: 40px;
+  padding: 4px 4px 22px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scroll-padding-inline: 4px;
+  scrollbar-width: thin;
+}
+
+.shot {
+  flex: none;
+  width: 232px;
+  scroll-snap-align: start;
+  margin: 0;
+}
+
+.shot img {
+  width: 232px;
+}
+
+.shot figcaption {
+  margin-top: 14px;
+  font-size: 0.875rem;
+  color: var(--mid);
+}
+
+/* --- forced colours ------------------------------------------------------
+   Windows High Contrast repaints every colour but leaves background-image
+   alone, so shapes drawn with a background vanish while decorative gradients
+   survive as noise. Both halves need saying. */
+
+@media (forced-colors: active) {
+  .embers {
+    display: none;
+  }
+
+  /* The Age markers are rotated squares filled with a background colour, which
+     forced-colors flattens to the canvas. */
+  .age::before {
+    forced-color-adjust: none;
+    background: CanvasText;
+  }
+
+  .store[aria-disabled='true'] {
+    border-color: GrayText;
+  }
+}
+
+/* --- closing block ------------------------------------------------------- */
+
+.close__line {
+  margin-inline: auto;
+  max-width: 48ch;
+  color: var(--mid);
+}
+
+.legal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.legal-actions .btn {
+  min-width: 190px;
+}
+</style>
+</head>
+<body>
+<div class="nav-sentinel" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+<div class="embers" aria-hidden="true"></div>
+<div class="field" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="shell nav__inner">
+    <a class="brand" href="../">
+      <img class="brand__mark" src="../assets/frs-mark.svg" alt="" width="26" height="26">
+      Frosty Robot Studio
+    </a>
+    <nav class="nav__links" aria-label="Timber Frenzy">
+      <a class="nav__link" href="../celestile/">Celestile</a>
+      <a class="nav__link" href="#get">Get it</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <!-- ===== hero ===== -->
+  <section class="hero">
+    <div class="shell hero__inner">
+      <img class="hero__icon" src="../assets/timber-icon-320.webp"
+           alt="Timber Frenzy app icon"
+           width="116" height="116" decoding="async">
+      <h1>Timber Frenzy</h1>
+      <p class="hero__tag">
+        Hold the clearing. Seven waves a stage, a hundred stages, ten Ages of
+        everything you built with what you carried back.
+      </p>
+
+      <div class="stores">
+        <a class="store" href="https://apps.apple.com/app/id6795207310">
+          <svg class="store__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M12 3v11"/><path d="m7.5 10 4.5 4.5 4.5-4.5"/><path d="M4.5 19.5h15"/>
+          </svg>
+          <span class="store__lines">
+            <span class="store__small">Download on the</span>
+            <span class="store__big">App Store</span>
+          </span>
+        </a>
+        <!-- TODO: at Play launch, replace href="#" with the listing URL, delete
+             aria-disabled and aria-describedby, change "Coming soon on" to
+             "Get it on", and delete #stores-note. -->
+        <a class="store" href="#" aria-disabled="true" aria-describedby="stores-note">
+          <svg class="store__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M12 3v11"/><path d="m7.5 10 4.5 4.5 4.5-4.5"/><path d="M4.5 19.5h15"/>
+          </svg>
+          <span class="store__lines">
+            <span class="store__small">Coming soon on</span>
+            <span class="store__big">Google Play</span>
+          </span>
+        </a>
+      </div>
+      <p class="stores__note" id="stores-note">
+        Free on iOS today. The Google Play listing is not live yet.
+      </p>
+
+      <figure class="hero__shot">
+        <img class="frame" src="shots/combat.webp"
+             alt="A Timber Frenzy stage in progress: the hero stands in a forest clearing with a turret behind him, health bars over a dozen advancing enemies, and a banner reading Wave 2 of 7."
+             width="720" height="1564" fetchpriority="high" decoding="async">
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===== the loop ===== -->
+  <section class="band" aria-labelledby="loop-h">
+    <div class="shell split">
+      <h2 id="loop-h">One run, three parts</h2>
+      <div class="split__body">
+        <p>
+          There is no build phase and no timer waiting for you. A stage is a
+          fight you walk into and either finish or do not, and everything you
+          spend afterwards is what you carried out of it.
+        </p>
+
+        <div class="loop">
+          <div class="loop__step">
+            <h3>Pick a stage from camp</h3>
+            <p>
+              Camp is the quiet screen: your hero, your animal, the chest you
+              have not opened. Choose how far up the ladder to go.
+            </p>
+          </div>
+          <div class="loop__step">
+            <h3>Hold seven waves</h3>
+            <p>
+              You fight in the clearing yourself, alongside a turret and your
+              animal. Chop what is standing for wood, and drop bombs and oil in
+              the path of what is coming.
+            </p>
+          </div>
+          <div class="loop__step">
+            <h3>Spend it, or lose it</h3>
+            <p>
+              Coins and treasure come back with you. Die and you still keep the
+              run&rsquo;s takings &mdash; the stage is what you lost, not the
+              afternoon.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== the ten Ages ===== -->
+  <section class="band" aria-labelledby="ages-h">
+    <div class="shell split">
+      <h2 id="ages-h">Ten Ages</h2>
+      <div class="split__body">
+        <p>
+          Your base has a level and the level has a name. Each Age raises what
+          every upgrade can reach &mdash; melee, ranged, health, your animal,
+          your turret &mdash; so the climb is the progression rather than a
+          number beside it.
+        </p>
+
+        <ol class="ages" role="list">
+          <li class="age" style="--step: 1"><span class="age__n">01</span><span class="age__name">Camp</span></li>
+          <li class="age" style="--step: 2"><span class="age__n">02</span><span class="age__name">Timber</span></li>
+          <li class="age" style="--step: 3"><span class="age__n">03</span><span class="age__name">Stone</span></li>
+          <li class="age" style="--step: 4"><span class="age__n">04</span><span class="age__name">Brick</span></li>
+          <li class="age" style="--step: 5"><span class="age__n">05</span><span class="age__name">Castle</span></li>
+          <li class="age" style="--step: 6"><span class="age__n">06</span><span class="age__name">Powder</span></li>
+          <li class="age" style="--step: 7"><span class="age__n">07</span><span class="age__name">Industrial</span></li>
+          <li class="age" style="--step: 8"><span class="age__n">08</span><span class="age__name">Modern</span></li>
+          <li class="age" style="--step: 9"><span class="age__n">09</span><span class="age__name">Fusion</span></li>
+          <li class="age" style="--step: 10"><span class="age__n">10</span><span class="age__name">Space</span></li>
+        </ol>
+
+        <p class="ages__note">
+          The building on the hill changes with every one of them.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== what is in a stage ===== -->
+  <section class="band" aria-labelledby="kit-h">
+    <div class="shell split">
+      <h2 id="kit-h">What you take in</h2>
+      <div class="split__body">
+        <dl class="spec">
+          <div class="spec__row">
+            <dt class="label">Turrets</dt>
+            <dd><b>Five tiers</b> &mdash; Crossbow Tower, Sentry Gun, Mortar, Rocket Turret, Laser Turret.</dd>
+          </div>
+          <div class="spec__row">
+            <dt class="label">Companions</dt>
+            <dd>Scout the Dog, Gale the Hawk, Ash the Wolf. One fights beside you.</dd>
+          </div>
+          <div class="spec__row">
+            <dt class="label">Loadout</dt>
+            <dd>Melee, ranged, pet and armour, each levelled from duplicates.</dd>
+          </div>
+          <!-- The daily free draws are deliberately not claimed here. They are
+               rewarded-ad draws gated behind adsAllowed(), so they do not exist
+               where advertising is switched off or consent is declined — which
+               would make a flat "three free draws a day" false for exactly the
+               readers least able to check it. The odds disclosure is true
+               everywhere, so that is what the row says. -->
+          <div class="spec__row">
+            <dt class="label">Treasure</dt>
+            <dd>Rarity tiers, with the draw odds <b>printed on the screen you draw from</b>.</dd>
+          </div>
+          <div class="spec__row">
+            <dt class="label">Plays</dt>
+            <dd>Offline, with an anonymous cloud save. No account, no login.</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== screenshots ===== -->
+  <section class="band" aria-labelledby="shots-h">
+    <div class="shell">
+      <h2 id="shots-h">Four screens</h2>
+
+      <div class="rail" tabindex="0" role="group" aria-label="Timber Frenzy screenshots, scrollable">
+        <figure class="shot">
+          <img class="frame" src="shots/camp.webp" width="560" height="1217" loading="lazy" decoding="async"
+               alt="The home camp at night: a campfire, a wolf companion, a treasure chest, and a stage selector reading Stage 24 above a Battle button.">
+          <figcaption>Camp. Pick a stage and go.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img class="frame" src="shots/ages.webp" width="560" height="1217" loading="lazy" decoding="async"
+               alt="The upgrade screen during the Industrial Age, with five upgrade cards: melee attack, max health, ranged attack, pet attack and turret attack.">
+          <figcaption>Industrial Age. Five things to raise.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img class="frame" src="shots/treasure.webp" width="560" height="1217" loading="lazy" decoding="async"
+               alt="The treasure draw screen, showing rarity tiers and the draw odds printed along the bottom: 70 percent, 24 percent, 5.5 percent and 1 percent.">
+          <figcaption>The odds are on the screen you draw from.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img class="frame" src="shots/loadout.webp" width="560" height="1217" loading="lazy" decoding="async"
+               alt="The equipment screen listing the current loadout's stats, with tabs for melee, ranged, pet and armour.">
+          <figcaption>Everything you are carrying, in one list.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== get it ===== -->
+  <section class="band" id="get" aria-labelledby="get-h">
+    <div class="shell stage">
+      <h2 id="get-h">Get Timber Frenzy</h2>
+      <p class="close__line">
+        Free on the App Store. The Google Play listing is not live yet &mdash;
+        the button at the top of this page will link out when it is.
+      </p>
+
+      <p>
+        <a class="btn btn--timber" href="https://apps.apple.com/app/id6795207310">Download on the App&nbsp;Store</a>
+      </p>
+
+      <div class="legal-actions">
+        <a class="btn btn--ghost" href="https://forest-frenzy-dd412.web.app/support.html">Support</a>
+        <a class="btn btn--ghost" href="https://forest-frenzy-dd412.web.app/privacy.html">Privacy Policy</a>
+        <a class="btn btn--ghost" href="https://forest-frenzy-dd412.web.app/terms.html">Terms of Use</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell foot__inner">
+    <p class="foot__note">&copy; 2026 Frosty Robot Studio LLC</p>
+    <ul class="foot__links" role="list">
+      <li><a href="../">Frosty Robot Studio</a></li>
+      <li><a href="../celestile/">Celestile</a></li>
+      <li><a href="mailto:contact@frostyrobotstudio.com">contact@frostyrobotstudio.com</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="../site.js" defer></script>
+</body>
+</html>
